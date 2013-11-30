@@ -1,0 +1,21 @@
+.test-element {
+  height: 2em;
+  margin: 1em 2em 1em 1em;
+  background: #eee;
+}
+
+.test-element .position {
+  display: inline-block;
+  line-height: 2em;
+  margin: 0 1em;
+  color: darkred;
+}
+.test-element .position.positive {
+  color: darkgreen;
+}
+
+.test-toggle {
+  position: fixed;
+  left: 1em;
+  top: 1em;
+}

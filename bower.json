@@ -1,0 +1,20 @@
+{
+  "name": "viewport",
+  "version": "0.1.0",
+  "main": "viewport.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "jquery": ">=1.10.2",
+    "requirejs": ">=2.1.9"
+  },
+  "keywords": [
+    "viewport",
+    "visible",
+    "elements",
+    "library"
+  ]
+}
