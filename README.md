@@ -1,4 +1,3 @@
-============================================
 Viewport
 ============================================
 
@@ -26,7 +25,6 @@ Utilities for working within the browser's viewport.
 ```
 
 
---------------------------------------------
 Methods
 --------------------------------------------
 
@@ -86,7 +84,6 @@ The information includes:
  - bottomFromBottom - the bottom of the element offset from the bottom of the viewport
 
 
---------------------------------------------
 Dependencies
 --------------------------------------------
 
