@@ -1,3 +1,6 @@
+// viewport - utilities for working within the browser's viewport
+// https://github.com/markfinger/viewport
+
 (function(root, jQuery, factory) {
 
   if (typeof define === 'function' && define.amd) {
