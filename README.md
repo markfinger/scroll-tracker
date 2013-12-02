@@ -28,17 +28,6 @@ Methods
 --------------------------------------------
 
 
-### viewport.setViewport(settings)
-
-Allows you to define top and bottom offsets of the viewport such that calculations of an element's position can take
-into consideration environment variables such as fixed headers and footers.
-
-The `settings` argument should be an object and can contain the following properties:
-
-- `topOffset` - a positive integer will lower the top of the viewport, versus a negative number which raises it.
-- `bottomOffset` - a positive integer will raise the bottom of the viewport, versus a negative number which lowers it.
-
-
 ### viewport.getPositionOf(element)
 
 Returns an object containing properties that detail an element's position relative to the viewport. The properties include:
@@ -56,6 +45,17 @@ Returns an object containing properties that detail an element's position relati
  - `bottom` - the bottom of the element offset from the top of the viewport.
 
 
+### viewport.setViewport(settings)
+
+Allows you to define top and bottom offsets of the viewport such that calculations of an element's position can take
+into consideration environment variables such as fixed headers and footers.
+
+The `settings` argument should be an object and can contain the following properties:
+
+- `topOffset` - a positive integer will lower the top of the viewport, versus a negative number which raises it.
+- `bottomOffset` - a positive integer will raise the bottom of the viewport, versus a negative number which lowers it.
+
+
 ### viewport.getScrollY()
 
 Returns the distance between the top of the document and the top of the viewport.
@@ -64,11 +64,6 @@ Returns the distance between the top of the document and the top of the viewport
 ### viewport.getHeight()
 
 Returns the height of the viewport.
-
-
-### viewport.getWidth()
-
-Returns the width of the viewport.
 
 
 ### viewport.getOffset(element)

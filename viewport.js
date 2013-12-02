@@ -128,10 +128,10 @@
   };
 
   return {
+    getPositionOf: getPositionOf,
     setViewport: setViewport,
     getScrollY: getScrollY,
     getHeight: getHeight,
-    getOffset: getOffset,
-    getPositionOf: getPositionOf
+    getOffset: getOffset
   };
 });
