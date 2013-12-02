@@ -1,6 +1,14 @@
-define([
-  'jquery'
-], function viewport($) {
+(function(root, jQuery, factory) {
+
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['jquery'], factory);
+  } else {
+    // Browser globals
+    root.viewport = factory(jQuery);
+  }
+
+})(this, jQuery, function viewport($) {
 
   var settings = {
     // A positive number lowers the top of the viewport,
@@ -93,6 +101,13 @@ define([
     var bottomAboveViewportBottom = elementBottom < viewportBottom;
     var bottomBelowViewportBottom = elementBottom >= viewportBottom;
 
+    var distanceFromViewport = 0;
+    if (bottomAboveViewportTop) {
+      distanceFromViewport = Math.abs(elementBottom - viewportTop);
+    } else if (topBelowViewportBottom) {
+      distanceFromViewport = Math.abs(elementTop - viewportBottom);
+    }
+
     return {
       in: !(topBelowViewportBottom || bottomAboveViewportTop),
       out: topBelowViewportBottom || bottomAboveViewportTop,
@@ -101,14 +116,10 @@ define([
       contained: topBelowViewportTop && bottomAboveViewportBottom,
       intersectsTop: topAboveViewportTop && bottomBelowViewportTop,
       intersectsBottom: topAboveViewportBottom && bottomBelowViewportBottom,
-      scrollY: scrollY,
-      viewportHeight: viewportHeight,
-      offset: offset,
+      distanceFromViewport: distanceFromViewport,
       offsetFromViewport: {
-        topFromTop: elementTop - viewportTop,
-        topFromBottom: elementTop - viewportBottom,
-        bottomFromTop: elementBottom - viewportTop,
-        bottomFromBottom: elementBottom - viewportBottom
+        top: elementTop - viewportTop,
+        bottom: elementBottom - viewportTop
       }
     };
   };

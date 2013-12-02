@@ -11,9 +11,7 @@ define([
   var initTestElements = function() {
     _.each(_.range(200), function() {
       var element = $('<div class="test-element">');
-      requestAnimationFrame(function() {
-        element.appendTo(testContainer);
-      });
+      element.appendTo(testContainer);
       testElements.push(element);
     });
   };
@@ -21,40 +19,46 @@ define([
   var checkElementsInViewport = function() {
     _.each(testElements, function(testElement) {
       var position = viewport.getPositionOf(testElement);
-      _.each(position, function(value, key) {
-        var element = testElement.find('.' + key);
+
+      var positionFormatter = function(value, className, textValue) {
+        var element = testElement.find('.' + className);
         if (!element.length) {
-          element = $('<span class="position ' + key + '">');
+          element = $('<span class="position ' + className + '">');
           element.appendTo(testElement);
         }
+
+        element.addClass('positive');
 
         var text;
 
         if (value === true || value === false) {
-          text = key;
-          if (value) {
-            element.addClass('positive');
-          } else {
+          text = className;
+          if (!value) {
             element.removeClass('positive');
           }
+        } else if (typeof value === "object") {
+          element.remove();
+          _.each(value, function(_value, _key) {
+            positionFormatter(_value, className + '-' + _key, className + '.' + _key);
+          });
+          return;
+        } else if (typeof value === "number") {
+          text = className + ': ' + value;
         } else {
-          text = key + ': ' + value;
-          element.addClass('positive');
+          text = textValue + ': ' + value;
         }
 
         element.text(text);
 
         if (!element.length) {
-          element = $('<span class="position ' + key + '">' + key + '</span>');
-          requestAnimationFrame(function() {
-            element.appendTo(testElement);
-          });
+          element = $('<span class="position ' + className + '">' + className + '</span>');
+          element.appendTo(testElement);
         }
-      });
+      }
+
+      _.each(position, positionFormatter);
     });
   };
-
-
 
   var setBindings = function() {
     testToggle.on('click', function() {
