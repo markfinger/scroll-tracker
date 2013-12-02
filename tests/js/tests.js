@@ -11,33 +11,57 @@ define([
   var initTestElements = function() {
     _.each(_.range(200), function() {
       var element = $('<div class="test-element">');
-      element.appendTo(testContainer);
+      requestAnimationFrame(function() {
+        element.appendTo(testContainer);
+      });
       testElements.push(element);
     });
   };
 
   var checkElementsInViewport = function() {
     _.each(testElements, function(testElement) {
-      var position = viewport.getElementPosition(testElement);
+      var position = viewport.getPositionOf(testElement);
       _.each(position, function(value, key) {
+        var element = testElement.find('.' + key);
+        if (!element.length) {
+          element = $('<span class="position ' + key + '">');
+          element.appendTo(testElement);
+        }
+
+        var text;
+
         if (value === true || value === false) {
-          var positionElement = testElement.find('.' + key);
-          if (!positionElement.length) {
-            positionElement = $('<span class="position ' + key + '">' + key + '</span>');
-            positionElement.appendTo(testElement);
-          }
+          text = key;
           if (value) {
-            positionElement.addClass('positive');
+            element.addClass('positive');
           } else {
-            positionElement.removeClass('positive');
+            element.removeClass('positive');
           }
+        } else {
+          text = key + ': ' + value;
+          element.addClass('positive');
+        }
+
+        element.text(text);
+
+        if (!element.length) {
+          element = $('<span class="position ' + key + '">' + key + '</span>');
+          requestAnimationFrame(function() {
+            element.appendTo(testElement);
+          });
         }
       });
     });
   };
 
+
+
   var setBindings = function() {
-    testToggle.on('click', checkElementsInViewport);
+    testToggle.on('click', function() {
+      testToggle.attr('disabled', true);
+      checkElementsInViewport();
+      testToggle.attr('disabled', false);
+    });
   };
 
   var init = function() {
@@ -50,6 +74,7 @@ define([
   };
 
   return {
-    init: init
+    init: init,
+    checkElementsInViewport: checkElementsInViewport
   };
 });

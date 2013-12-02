@@ -10,5 +10,8 @@ require([
   'jquery',
   './tests'
 ], function($, tests) {
-  $(tests.init);
+  $(function() {
+    tests.init();
+    tests.checkElementsInViewport();
+  });
 });

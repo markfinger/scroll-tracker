@@ -1,6 +1,12 @@
 {
   "name": "viewport",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "description": "Utilities for working within the browser's viewport",
+  "homepage": "http://github.com/markfinger/viewport",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/markfinger/viewport.git"
+  },
   "main": "viewport.js",
   "ignore": [
     "**/.*",
@@ -13,6 +19,7 @@
   },
   "keywords": [
     "viewport",
+    "utilities",
     "visible",
     "elements",
     "library"

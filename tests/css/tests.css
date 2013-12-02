@@ -1,17 +1,24 @@
+body {
+  margin: 0;
+}
+
 .test-element {
-  height: 2em;
-  margin: 1em 2em 1em 1em;
-  background: #eee;
+  min-height: 4em;
+  background: #aaa;
+  background: linear-gradient(to bottom, #eee 0%, #bbb 100%);
+  border-bottom: 1px solid #999;
 }
 
 .test-element .position {
   display: inline-block;
-  line-height: 2em;
+  line-height: 4em;
   margin: 0 1em;
-  color: darkred;
+  color: #999;
 }
+
 .test-element .position.positive {
-  color: darkgreen;
+  color: #333;
+  transition: color 0.5s;
 }
 
 .test-toggle {
