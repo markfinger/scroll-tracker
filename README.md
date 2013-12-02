@@ -6,21 +6,20 @@ Utilities for working within the browser's viewport.
 
 ```javascript
 
-  // Example
-  // Adds/removes classes if an element is in the viewport
+  // An example that triggers media assets based on the 
+  // position of their elements within the viewport
 
-  require(['viewport'], function(viewport) {
-
-    var element = $('.my-element');
-    var position = viewport.getElementPosition(element);
-
-    if (position.in) {
-      element.addClass('active');
-    } else if (position.out) {
-      element.removeClass('active');
-    }
-
-  });
+  var video = document.getElementsByTagName('video')[0];
+  
+  var position = viewport.getPositionOf(video);
+  
+  if (position.in) {
+    video.play();
+  } else if (position.distanceFromViewport < viewport.getHeight()) {
+    fadeInAmbience();
+  } else {
+    video.pause();
+  }
 
 ```
 
@@ -37,7 +36,24 @@ into consideration environment variables such as fixed headers and footers.
 The `settings` argument should be an object and can contain the following properties:
 
 - `topOffset` - a positive integer will lower the top of the viewport, versus a negative number which raises it.
-- `bottomOffset` - a positive integer will lower the bottom of the viewport, versus a negative number which raises it.
+- `bottomOffset` - a positive integer will raise the bottom of the viewport, versus a negative number which lowers it.
+
+
+### viewport.getPositionOf(element)
+
+Returns an object containing properties that detail an element's position relative to the viewport. The properties include:
+
+- `in` - indicates if the element is at least partially within the viewport.
+- `out` - indicates if the element is completely outside of the viewport.
+- `above` - indicates if the element is above the viewport.
+- `below` - indicates if the element is below the viewport.
+- `contained` - indicates if the element is completely within the viewport.
+- `intersectsTop` - indicates if the element is partially within the viewport and has a top edge that is above the viewport.
+- `intersectsBottom` - indicates if the element is partially within the viewport and has a bottom edge that is below the viewport.
+- `distanceFromViewport` - A positive integer that reflects the distance botween the closest two points of the element and the viewport. If the element is within the viewport, this will equal 0.
+- `viewportOffset` - an object containing offsets relative to the viewport:
+ - `top` - the top of the element offset from the top of the viewport.
+ - `bottom` - the bottom of the element offset from the top of the viewport.
 
 
 ### viewport.getScrollY()
@@ -62,42 +78,8 @@ Returns a superset of [jQuery.offset](http://api.jquery.com/offset/) that includ
 - `right` is measured from the left of the document.
 
 
-### viewport.getPositionOf(element)
-
-Returns an object containing details about an element's position relative to the viewport.
-
-The information includes:
-- `in` - indicates if the element is at least partially within the viewport [Boolean]
-- `out` - indicates if the element is completely outside of the viewport [Boolean]
-- `above` - indicates if the element is above the viewport [Boolean]
-- `below` - indicates if the element is below the viewport [Boolean]
-- `contained` - indicates if the element is completely within the viewport [Boolean]
-- `intersectsTop` - indicates if the element is partially within the viewport and intersects with the top of the viewport [Boolean]
-- `intersectsBottom` - indicates if the element is partially within the viewport and intersects with the bottom of the viewport [Boolean]
-- `scrollY` - the distance between the top of the document and the top of the viewport. Equivalent to `viewport.getScrollY()`. [Integer]
-- `viewportHeight` - the height of viewport. Equivalent to `viewport.getHeight()`. [Integer]
-- `offset` - contains the various offsets of `element` relative to the document. Equivalent to `viewport.getOffset(element)`. [Object]
-- `offsetFromViewport` - contains various offsets of `element` relative to the viewport, including:
- - topFromTop - the top of the element offset from the top of the viewport
- - topFromBottom - the top of the element offset from the bottom of the viewport
- - bottomFromTop - the bottom of the element offset from the top of the viewport
- - bottomFromBottom - the bottom of the element offset from the bottom of the viewport
-
-
 Dependencies
 --------------------------------------------
 
 
-- [RequireJS](https://github.com/jrburke/requirejs)
-- [jQuery](https://github.com/jquery/jquery)
-
-Viewport depends on your require.js path config having an entry for `jquery`. Something like the following will work...
-```javascript
-  require.config({
-    paths: {
-      jquery: '/path/to/jquery',
-      // ...
-    },
-    // ...
-  });
-```
+- [jQuery](https://github.com/jquery/jquery) (Built against 1.10+, earlier versions probably work)
