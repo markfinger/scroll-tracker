@@ -112,8 +112,8 @@
     }
 
     return {
-      in: !(topBelowViewportBottom || bottomAboveViewportTop),
-      out: topBelowViewportBottom || bottomAboveViewportTop,
+      inside: !(topBelowViewportBottom || bottomAboveViewportTop),
+      outside: topBelowViewportBottom || bottomAboveViewportTop,
       above: bottomAboveViewportTop,
       below: topBelowViewportBottom,
       contained: topBelowViewportTop && bottomAboveViewportBottom,

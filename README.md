@@ -13,7 +13,7 @@ Utilities for working within the browser's viewport.
   
   var position = viewport.getPositionOf(video);
   
-  if (position.in) {
+  if (position.inside) {
     video.play();
   } else if (position.distanceFromViewport < viewport.getHeight()) {
     fadeInAmbience();
@@ -32,8 +32,8 @@ Methods
 
 Returns an object containing properties that detail an element's position relative to the viewport. The properties include:
 
-- `in` - indicates if the element is at least partially within the viewport.
-- `out` - indicates if the element is completely outside of the viewport.
+- `inside` - indicates if the element is at least partially within the viewport.
+- `outside` - indicates if the element is completely outside of the viewport.
 - `above` - indicates if the element is above the viewport.
 - `below` - indicates if the element is below the viewport.
 - `contained` - indicates if the element is completely within the viewport.
