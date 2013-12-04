@@ -1,5 +1,7 @@
 define([
-  'jquery', 'lodash', 'viewport'
+  'jquery',
+  'lodash',
+  'viewport'
 ], function scroll($, _, viewport) {
 
   var trackedElements = [];
