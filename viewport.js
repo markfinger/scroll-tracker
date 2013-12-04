@@ -1,7 +1,9 @@
 // viewport - utilities for working within the browser's viewport
 // https://github.com/markfinger/viewport
 
-define(['jquery'], function viewport($) {
+define([
+  'jquery'
+], function viewport($) {
 
   var settings = {
     // A positive number lowers the top of the viewport,
