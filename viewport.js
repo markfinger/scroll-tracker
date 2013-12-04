@@ -1,17 +1,7 @@
 // viewport - utilities for working within the browser's viewport
 // https://github.com/markfinger/viewport
 
-(function(root, jQuery, factory) {
-
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['jquery'], factory);
-  } else {
-    // Browser globals
-    root.viewport = factory(jQuery);
-  }
-
-})(this, jQuery, function viewport($) {
+define(['jquery'], function viewport($) {
 
   var settings = {
     // A positive number lowers the top of the viewport,
@@ -77,15 +67,16 @@
     return offset;
   };
 
-  var getPositionOf = function(element) {
+  var getPositionOf = function(element, precomputed) {
     // Returns an object containing details about the position
     // of `element` relative to the viewport
 
     element = _wrapElement(element);
 
-    var scrollY = getScrollY();
-    var viewportHeight = getHeight();
-    var offset = getOffset(element);
+    precomputed = precomputed || {};
+    var scrollY = precomputed.scrollY || getScrollY();
+    var viewportHeight = precomputed.viewportHeight || getHeight();
+    var offset = precomputed.offset || getOffset(element);
 
     var viewportTop = scrollY;
     var viewportBottom = scrollY + viewportHeight;
@@ -120,10 +111,7 @@
       intersectsTop: topAboveViewportTop && bottomBelowViewportTop,
       intersectsBottom: topAboveViewportBottom && bottomBelowViewportBottom,
       distanceFromViewport: distanceFromViewport,
-      offsetFromViewport: {
-        top: elementTop - viewportTop,
-        bottom: elementBottom - viewportTop
-      }
+      offsetTopFromViewport: elementTop - viewportTop
     };
   };
 

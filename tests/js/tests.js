@@ -1,18 +1,63 @@
 define([
   'jquery',
   'lodash',
-  'viewport'
-], function($, _, viewport) {
+  'viewport',
+  'scroll'
+], function($, _, viewport, scroll) {
 
   var testContainer;
+  var topOffsetElement;
+  var bottomOffsetElement;
   var testToggle;
-  var testElements = [];
+  var testElements;
 
   var initTestElements = function() {
-    _.each(_.range(200), function() {
+    testElements = _.map(_.range(50), function() {
       var element = $('<div class="test-element">');
       element.appendTo(testContainer);
-      testElements.push(element);
+      return element;
+    });
+    checkElementsInViewport();
+    _.each(testElements, function(element) {
+      var elements = {
+        inside: element.find('.inside'),
+        outside: element.find('.outside'),
+        above: element.find('.above'),
+        below: element.find('.below'),
+        contained: element.find('.contained'),
+        intersectsTop: element.find('.intersectsTop'),
+        intersectsBottom: element.find('.intersectsBottom'),
+      };
+      scroll.init();
+      var updateElement = function(position) {
+        _.each(elements, function(element, property) {
+          var value = position[property];
+          if (value === true || value === false) {
+            var hasClass = element.hasClass('positive');
+            if (value === true && !hasClass) {
+              element.addClass('positive');
+            } else if (value === false && hasClass) {
+              element.removeClass('positive');
+            }
+          } else if (typeof value === 'number') {
+            element.text(property + ': ' + value);
+          }
+        });
+      };
+      scroll.track(element, {
+        enter: updateElement,
+        exit: updateElement,
+        contained: updateElement,
+        intersectsTop: updateElement,
+        intersectsBottom: updateElement
+      });
+    });
+  };
+
+  var initViewportOffsets = function() {
+    viewport.setViewport({
+      topOffset: topOffsetElement.outerHeight(),
+      bottomOffset: bottomOffsetElement.outerHeight()
     });
   };
 
@@ -54,7 +99,7 @@ define([
           element = $('<span class="position ' + className + '">' + className + '</span>');
           element.appendTo(testElement);
         }
-      }
+      };
 
       _.each(position, positionFormatter);
     });
@@ -70,9 +115,12 @@ define([
 
   var init = function() {
     testContainer = $('.test-container');
+    topOffsetElement = $('.viewport-top-offset');
+    bottomOffsetElement = $('.viewport-bottom-offset');
     testToggle = $('.test-toggle');
 
-    initTestElements();
+    initViewportOffsets();
+    _.defer(initTestElements);
 
     setBindings();
   };
