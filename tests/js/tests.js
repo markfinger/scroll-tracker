@@ -18,6 +18,7 @@ define([
       return element;
     });
     checkElementsInViewport();
+    scroll.init();
     _.each(testElements, function(element) {
       var elements = {
         inside: element.find('.inside'),
@@ -26,10 +27,10 @@ define([
         below: element.find('.below'),
         contained: element.find('.contained'),
         intersectsTop: element.find('.intersectsTop'),
-        intersectsBottom: element.find('.intersectsBottom'),
+        intersectsBottom: element.find('.intersectsBottom')
       };
-      scroll.init();
-      var updateElement = function(position) {
+      var updateElement = function(obj) {
+        var position = obj.position;
         _.each(elements, function(element, property) {
           var value = position[property];
           if (value === true || value === false) {
