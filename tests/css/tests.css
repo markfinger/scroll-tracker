@@ -46,3 +46,10 @@ body {
 .viewport-bottom-offset {
   bottom: 0;
 }
+
+.viewport-middle {
+  position: fixed;
+  top: 50%;
+  width: 100%;
+  border-bottom: 1px dashed maroon;
+}

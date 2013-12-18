@@ -27,7 +27,8 @@ define([
         below: element.find('.below'),
         contained: element.find('.contained'),
         intersectsTop: element.find('.intersectsTop'),
-        intersectsBottom: element.find('.intersectsBottom')
+        intersectsBottom: element.find('.intersectsBottom'),
+        intersectsMiddle: element.find('.intersectsMiddle')
       };
       var updateElement = function(obj) {
         var position = obj.position;
@@ -45,7 +46,7 @@ define([
           }
         });
       };
-      scroll.track(element, {
+      scroll.on(element, {
         enter: updateElement,
         exit: updateElement,
         contained: updateElement,
