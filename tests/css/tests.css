@@ -3,15 +3,18 @@ body {
 }
 
 .test-element {
-  min-height: 4em;
+  min-height: 2em;
+  padding: 1em 0;
   background: #aaa;
   background: linear-gradient(to bottom, #eee 0%, #bbb 100%);
+  border-top: 1px solid #ddd;
   border-bottom: 1px solid #999;
+  margin: 1.5em 0;
 }
 
 .test-element .position {
   display: inline-block;
-  line-height: 4em;
+  line-height: 2em;
   margin: 0 1em;
   color: #aaa;
   transition: color 0.25s;
