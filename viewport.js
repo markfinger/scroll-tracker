@@ -104,16 +104,33 @@ define([
       distanceFromViewport = Math.abs(elementTop - viewportBottom);
     }
 
+    var inside = !(topBelowViewportBottom || bottomAboveViewportTop);
+
+    var intersectsMiddle = false;
+    if (inside) {
+      var viewportMiddle = viewportTop + ((viewportBottom - viewportTop) / 2);
+      if (elementTop <= viewportMiddle && elementBottom >= viewportMiddle) {
+        intersectsMiddle = true;
+      }
+    }
+
     return {
-      inside: !(topBelowViewportBottom || bottomAboveViewportTop),
-      outside: topBelowViewportBottom || bottomAboveViewportTop,
+      inside: inside,
+      outside: !inside,
       above: bottomAboveViewportTop,
       below: topBelowViewportBottom,
       contained: topBelowViewportTop && bottomAboveViewportBottom,
       intersectsTop: topAboveViewportTop && bottomBelowViewportTop,
+      intersectsMiddle: intersectsMiddle,
       intersectsBottom: topAboveViewportBottom && bottomBelowViewportBottom,
       distanceFromViewport: distanceFromViewport,
-      offsetTopFromViewport: elementTop - viewportTop
+      offsetTopFromViewport: elementTop - viewportTop,
+      viewportTop: viewportTop,
+      viewportMiddle: viewportMiddle,
+      viewportBottom: viewportBottom,
+      elementTop: elementTop,
+      elementBottom: elementBottom,
+      scrollY: scrollY
     };
   };
 
