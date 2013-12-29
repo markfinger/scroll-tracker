@@ -1,9 +1,8 @@
-define([
+require([
   'jquery',
   'lodash',
-  'viewport',
-  'scroll'
-], function($, _, viewport, scroll) {
+  'viewport'
+], function($, _, viewport) {
 
   var testContainer;
   var topOffsetElement;
@@ -18,7 +17,6 @@ define([
       return element;
     });
     checkElementsInViewport();
-    scroll.init();
     _.each(testElements, function(element) {
       var elements = {
         inside: element.find('.inside'),
@@ -46,7 +44,7 @@ define([
           }
         });
       };
-      scroll.on(element, {
+      viewport.on(element, {
         enter: updateElement,
         exit: updateElement,
         contained: updateElement,
@@ -57,15 +55,13 @@ define([
   };
 
   var initViewportOffsets = function() {
-    viewport.setViewport({
-      topOffset: topOffsetElement.outerHeight(),
-      bottomOffset: bottomOffsetElement.outerHeight()
-    });
+    viewport.settings.topPadding = topOffsetElement.outerHeight();
+    viewport.settings.bottomOffset = bottomOffsetElement.outerHeight();
   };
 
   var checkElementsInViewport = function() {
     _.each(testElements, function(testElement) {
-      var position = viewport.getPositionOf(testElement);
+      var position = viewport.positionOf(testElement);
 
       var positionFormatter = function(value, className, textValue) {
         var element = testElement.find('.' + className);
@@ -127,8 +123,5 @@ define([
     setBindings();
   };
 
-  return {
-    init: init,
-    checkElementsInViewport: checkElementsInViewport
-  };
+  init();
 });
