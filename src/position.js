@@ -1,6 +1,7 @@
 define([
-  './utils'
+  'viewport/src/utils'
 ], function(utils) {
+
   var positionOf = function(element, precomputed) {
     // Returns an object containing details about the position
     // of `element` relative to the viewport
@@ -67,4 +68,5 @@ define([
   return {
     positionOf: positionOf
   };
+
 });

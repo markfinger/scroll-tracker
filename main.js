@@ -3,17 +3,23 @@
 
 define([
   'lodash',
-  'viewport/lib/settings',
-  'viewport/lib/position',
-  'viewport/lib/on',
-  'viewport/lib/utils'
-], function(_, settings, position, on, utils) {
+  'viewport/src/bindings',
+  'viewport/src/on',
+  'viewport/src/position',
+  'viewport/src/settings',
+  'viewport/src/trigger',
+  'viewport/src/utils'
+], function(_, bindings, on, position, settings, trigger, utils) {
 
   // Merge the modules
   return _.assign(
-    { settings: settings },
-    position,
+    {
+      bindings: bindings,
+      settings: settings
+    },
     on,
+    position,
+    trigger,
     utils
   );
 

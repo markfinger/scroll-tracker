@@ -2,16 +2,20 @@ require.config({
   paths: {
     jquery: '../components/jquery/jquery',
     lodash: '../components/lodash/lodash',
-    qunit: '../components/qunit/qunit/qunit'
+    QUnit: '../components/qunit/qunit/qunit'
   },
   shim: {
-    qunit: {
-      exports: 'QUnit'
+    QUnit: {
+      exports: 'QUnit',
+      init: function() {
+        QUnit.config.autoload = false;
+        QUnit.config.autostart = false;
+      }
     }
   },
   packages: [{
     name: 'viewport',
-    location: '../../'
+    location: '../..'
   }]
 });
 
@@ -21,9 +25,9 @@ require([
 ], function($) {
   $(function() {
     if ($('#qunit').length) {
-      require(['./unit-tests']);
+      require(['./unit-tests/main']);
     } else {
-      require(['./visual-tests']);
+      require(['./visual-tests/main']);
     }
   });
 });

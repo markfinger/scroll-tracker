@@ -1,6 +1,6 @@
 define([
   'jquery',
-  './settings'
+  'viewport/src/settings'
 ], function($, settings) {
 
   var _wrapElement = function(element) {
@@ -28,11 +28,11 @@ define([
 
     var height = window.innerHeight;
 
-    if (settings.topPadding) {
+    if (settings.topPadding !== 0) {
       height -= settings.topPadding;
     }
 
-    if (settings.bottomPadding) {
+    if (settings.bottomPadding !== 0) {
       height -= settings.bottomPadding;
     }
 
