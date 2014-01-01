@@ -99,7 +99,6 @@ define([
         _.remove(bindings, obj);
         match = true;
       }
-
       bindings.clean();
     }
 

@@ -15,7 +15,10 @@ define([
         _.each(obj.bindings[name], function(obj) {
           var binding = obj.binding;
           var options = obj.options;
+
+          // TODO: pass in a position object..?
           binding();
+
           if (options.once) {
             bindings.remove(element, name, binding);
           }

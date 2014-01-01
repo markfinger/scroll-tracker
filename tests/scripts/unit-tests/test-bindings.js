@@ -61,6 +61,24 @@ define([
         viewport.bindings[0].bindings['test2'] !== undefined,
         'Viewport bindings for the body\'s `test` position should have been removed, leaving `test2` intact'
       );
+
+      viewport.bindings.length = 0;
+
+      var testFunc1 = function() { var one = 1; };
+      var testFunc2 = function() { var two = 2; };
+      viewport.bindings.set(document.body, 'test', testFunc1);
+      viewport.bindings.set(document.body, 'test', testFunc2);
+      viewport.bindings.remove(document.body, 'test', testFunc1);
+      equal(
+        viewport.bindings[0].bindings['test'].length,
+        1,
+        'Unbinding a specific function for a specific position should not have removed other bindings'
+      );
+      deepEqual(
+        viewport.bindings[0].bindings['test'][0].binding,
+        testFunc2,
+        'Unbinding via a function will leave other functions intact'
+      );
     });
 
     QUnit.test('clean binding', function() {
