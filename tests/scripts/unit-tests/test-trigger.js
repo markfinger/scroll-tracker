@@ -7,9 +7,7 @@ define([
     QUnit.module('viewport.trigger');
 
     QUnit.test('Accepts correct arguments', function() {
-      viewport.on(document.body, {
-        test: function() {}
-      });
+      viewport.on(document.body, 'test', function() {});
       ok(viewport.trigger(document.body, 'test'), 'Accepts dummy event.');
     });
 
@@ -18,19 +16,15 @@ define([
     });
 
     QUnit.test('Triggers bindings', 1, function() {
-      viewport.on(document.body, {
-        enter: function() {
-          ok(true, 'Triggered binding.');
-        }
+      viewport.on(document.body, 'enter', function() {
+        ok(true, 'Triggered binding.');
       });
       viewport.trigger(document.body, 'enter')
     });
 
     QUnit.test('Triggers custom bindings', 1, function() {
-      viewport.on(document.body, {
-        test: function() {
-          ok(true, 'Triggered custom binding.');
-        }
+      viewport.on(document.body, 'test', function() {
+        ok(true, 'Triggered custom binding.');
       });
       viewport.trigger(document.body, 'test')
     });

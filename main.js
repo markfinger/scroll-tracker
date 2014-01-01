@@ -4,22 +4,36 @@
 define([
   'lodash',
   'viewport/src/bindings',
+  'viewport/src/check',
+  'viewport/src/off',
   'viewport/src/on',
-  'viewport/src/position',
+  'viewport/src/once',
+  'viewport/src/positions',
   'viewport/src/settings',
+  'viewport/src/start',
+  'viewport/src/stop',
   'viewport/src/trigger',
+  'viewport/src/update',
   'viewport/src/utils'
-], function(_, bindings, on, position, settings, trigger, utils) {
+], function(_, bindings, check, off, on, once, positions, settings, start, stop, trigger, update, utils) {
 
-  // Merge the modules
   return _.assign(
+    // Methods and objects
     {
       bindings: bindings,
-      settings: settings
+      check: check,
+      off: off,
+      on: on,
+      once: once,
+      settings: settings,
+      start: start,
+      stop: stop,
+      trigger: trigger,
+      update: update
     },
-    on,
-    position,
-    trigger,
+    // The properties of these objects are merged in
+    // to the above object
+    positions,
     utils
   );
 

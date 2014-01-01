@@ -6,10 +6,10 @@ define([
 
   var defaultSettings = _.clone(viewport.settings);
 
-  QUnit.testDone(function() {
-    console.log('----------')
+  QUnit.testDone(function tearDown() {
     viewport.bindings.length = 0;
     viewport.settings = _.assign(viewport.settings, defaultSettings);
+    viewport.stop();
   });
 
   var test = function() {
@@ -18,7 +18,7 @@ define([
     QUnit.test('Initial test and populate', function() {
       equal(viewport.bindings.length, 0, 'viewport.bindings length should be 0.');
       // Insert some bindings
-      viewport.on(document.body, { enter: function(){} });
+      viewport.on(document.body, 'enter', function(){});
       equal(viewport.bindings.length, 1, 'viewport.bindings length should be 1.');
     });
 

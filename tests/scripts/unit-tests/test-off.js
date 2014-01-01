@@ -21,7 +21,7 @@ define([
     });
 
     QUnit.test('Returns true for unbound elements', function() {
-      viewport.on(document.body, {});
+      viewport.on(document.body, 'test', function() {});
 
       // sanity check
       equal(
@@ -45,14 +45,12 @@ define([
 
     QUnit.test('Returns true for specifically named bindings', function() {
 
-      viewport.on(document.body, {
-        enter: function() { },
-        exit: function() { }
-      });
+      viewport.on(document.body, 'enter', function() { });
+      viewport.on(document.body, 'exit', function() { });
 
       equal(
         viewport.off(document.body, 'enter'),
-        false,
+        true,
         'Should return true as the binding name is matched.'
       );
 
@@ -60,15 +58,13 @@ define([
 
     });
 
-    QUnit.test('Returns true and removes the binding obj if a named binding was the last binding on an element', function() {
+    QUnit.test('Removes the binding object if the removed binding was the last binding on an element', function() {
 
-      viewport.on(document.body, {
-        enter: function() { }
-      });
+      viewport.on(document.body, 'enter', function() { });
 
       equal(
         viewport.off(document.body, 'enter'),
-        false,
+        true,
         'Should return true as the binding name is matched.'
       );
 
