@@ -18,6 +18,7 @@ define([
       ok(_.contains(keys, 'intersectsBottom'), 'intersectsBottom has been bound');
     });
 
+
     QUnit.module('viewport.is');
 
     QUnit.test('Can check a position', function() {
@@ -26,6 +27,7 @@ define([
       ok(viewport.is(document.body, 'intersectsBottom'), 'does the body intersect the bottom of the viewport');
       ok(!viewport.is(document.body, 'outside'), 'check if the body is not in the viewport and expect false');
     });
+
 
     QUnit.module('viewport.define');
 
