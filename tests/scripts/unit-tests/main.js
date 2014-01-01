@@ -10,8 +10,9 @@ define([
   'unit-tests/test-settings',
   'unit-tests/test-start',
   'unit-tests/test-stop',
-  'unit-tests/test-trigger'
-], function(QUnit, tearDown, bindings, height, off, on, once, scrollY, settings, start, stop, trigger) {
+  'unit-tests/test-trigger',
+  'unit-tests/test-update'
+], function(QUnit, tearDown, bindings, height, off, on, once, scrollY, settings, start, stop, trigger, update) {
 
   // Test the individual modules
   bindings.test();
@@ -24,6 +25,7 @@ define([
   start.test();
   stop.test();
   trigger.test();
+  update.test();
 
   // TODO
   // check

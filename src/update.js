@@ -4,14 +4,16 @@ define([
   'viewport/src/utils'
 ], function(_, bindings, utils) {
 
+  var _update = function(obj) {
+    obj.position = utils.getOffset(obj.element);
+  };
+
   return function update(element) {
-    // TODO
     if (element) {
-      throw Error('not implemented');
+      _update(bindings.get(element));
+    } else {
+      _.each(bindings, _update);
     }
-    _.each(bindings, function(obj) {
-      obj.offset = utils.getOffset(obj.element);
-    });
   };
 
 });
