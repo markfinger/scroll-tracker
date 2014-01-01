@@ -42,7 +42,7 @@ define([
       obj = {
         element: element,
         bindings: {},
-        position: utils.getOffset(element)
+        position: utils.offsetOf(element)
       };
       bindings.push(obj);
     }

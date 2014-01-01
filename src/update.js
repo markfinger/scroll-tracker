@@ -5,7 +5,7 @@ define([
 ], function(_, bindings, utils) {
 
   var _update = function(obj) {
-    obj.position = utils.getOffset(obj.element);
+    obj.position = utils.offsetOf(obj.element);
   };
 
   return function update(element) {

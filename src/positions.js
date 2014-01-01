@@ -1,71 +1,80 @@
 define([
-  'lodash'
-], function(_) {
+  'viewport/src/utils'
+], function(utils) {
 
   var positions = {};
 
-  var definePosition = function(name, position) {
-    positions[name] = position;
+  var is = function is(element, name, position) {
+    if (positions[name] === undefined) {
+      throw new Error('Undefined position: ' + name);
+    }
+
+    if (position === undefined) {
+      position = utils.positionOf(element);
+    }
+
+    return positions[name](element, position);
   };
 
-  var checkPosition = function(name, position) {
-    return positions[name](position);
+  var definePosition = function definePosition(name, test) {
+    positions[name] = test;
   };
 
-  definePosition('above', function(position) {
-    return position.elementBottom < position.viewportTop;
+  definePosition('above', function(element, position) {
+    return position.bottom < position.viewportTop;
   });
 
-  definePosition('below', function(position) {
-    return position.elementTop > position.viewportBottom;
+  definePosition('below', function(element, position) {
+    return position.top > position.viewportBottom;
   });
 
-  definePosition('outside', function(position) {
+  definePosition('outside', function(element, position) {
     return (
-      checkPosition('above', position) ||
-      checkPosition('below', position)
+      is(element, 'above', position) ||
+      is(element, 'below', position)
     );
   });
 
-  definePosition('inside', function(position) {
-    return !(checkPosition('outside', position));
+  definePosition('inside', function(element, position) {
+    return !(is(element, 'outside', position));
   });
 
-  definePosition('intersectsTop', function(position) {
+  definePosition('intersectsTop', function(element, position) {
     return (
-      position.elementTop <= position.viewportTop &&
-      position.elementBottom >= position.viewportTop
+      position.top <= position.viewportTop &&
+      position.bottom >= position.viewportTop
     );
   });
 
-  definePosition('intersectsMiddle', function(position) {
+  definePosition('intersectsMiddle', function(element, position) {
     var viewportMiddle = position.viewportHeight / 2;
     return (
-      position.elementTop <= viewportMiddle &&
-      position.elementBottom >= viewportMiddle
+      position.top <= viewportMiddle &&
+      position.bottom >= viewportMiddle
     );
   });
 
-  definePosition('intersectsBottom', function(position) {
+  definePosition('intersectsBottom', function(element, position) {
     return (
-      position.elementTop <= position.viewportBottom &&
-      position.elementBottom >= position.viewportBottom
+      position.top <= position.viewportBottom &&
+      position.bottom >= position.viewportBottom
     );
   });
 
-  definePosition('contained', function(position) {
+  definePosition('contained', function(element, position) {
     return (
-      checkPosition('inside', position) &&
+      is(element, 'inside', position) &&
       !(
-        checkPosition('intersectsTop', position) ||
-        checkPosition('intersectsBottom', position)
+        is(element, 'intersectsTop', position) ||
+        is(element, 'intersectsBottom', position)
       )
     );
   });
 
   return {
-    definePosition: definePosition,
-    checkPosition: checkPosition
+    positions: positions,
+    is: is,
+    definePosition: definePosition
   };
 
 });

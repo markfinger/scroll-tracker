@@ -5,11 +5,23 @@ define([
 ], function(QUnit, viewport, _) {
 
   var defaultSettings = _.clone(viewport.settings);
+  var defaultPositions = _.clone(viewport.positions);
 
   QUnit.testDone(function tearDown() {
+    // Reset bindings
     viewport.bindings.length = 0;
+    // Reset settings
     viewport.settings = _.assign(viewport.settings, defaultSettings);
+    // Prevent listeners from carrying across
     viewport.stop();
+    // Reset positions
+    _.each(viewport.positions, function(value, key) {
+      if (!defaultPositions[key]) {
+        delete viewport.positions[key];
+      } else {
+        viewport.positions[key] = defaultPositions[key];
+      }
+    });
   });
 
   var test = function() {

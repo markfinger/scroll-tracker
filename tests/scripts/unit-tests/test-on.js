@@ -57,6 +57,14 @@ define([
       viewport.trigger(document.body, 'enter');
     });
 
+    QUnit.test('Binding an element causes events to be bound', function() {
+      equal(viewport.settings.hasBoundEvents, false, 'events have not been bound');
+
+      viewport.on(document.body, 'enter', function(){});
+
+      equal(viewport.settings.hasBoundEvents, true, 'events have been bound');
+    });
+
   };
 
   return {

@@ -1,7 +1,8 @@
 define([
   'jquery',
+  'lodash',
   'viewport/src/settings'
-], function($, settings) {
+], function($, _, settings) {
 
   var scrollY = function() {
     // Cross-browser determination of the the amount of pixels scrolled
@@ -25,7 +26,7 @@ define([
     return height;
   };
 
-  var getOffset = function(element) {
+  var offsetOf = function(element) {
     // Returns a superset of jQuery(element).offset
 
     if (!element.jquery) {
@@ -33,6 +34,10 @@ define([
     }
 
     var offset = element.offset();
+
+    if (!offset) {
+      console.log(element[0], offset)
+    }
 
     if (settings.topPadding) {
       offset.top -= settings.topPadding;
@@ -43,9 +48,26 @@ define([
     return offset;
   };
 
+  var positionOf = function(element) {
+
+    var _scrollY = scrollY();
+    var _height = height();
+
+    return _.extend(
+      {
+        viewportTop: _scrollY,
+        viewportBottom: _scrollY + _height,
+        viewportHeight: _height
+      },
+      offsetOf(element)
+    );
+
+  };
+
   return {
     scrollY: scrollY,
     height: height,
-    getOffset: getOffset
+    offsetOf: offsetOf,
+    positionOf: positionOf
   };
 });

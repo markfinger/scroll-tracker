@@ -6,13 +6,14 @@ define([
   'unit-tests/test-off',
   'unit-tests/test-on',
   'unit-tests/test-once',
+  'unit-tests/test-positions',
   'unit-tests/test-scroll-y',
   'unit-tests/test-settings',
   'unit-tests/test-start',
   'unit-tests/test-stop',
   'unit-tests/test-trigger',
   'unit-tests/test-update'
-], function(QUnit, tearDown, bindings, height, off, on, once, scrollY, settings, start, stop, trigger, update) {
+], function(QUnit, tearDown, bindings, height, off, on, once, positions, scrollY, settings, start, stop, trigger, update) {
 
   // Test the individual modules
   bindings.test();
@@ -20,6 +21,7 @@ define([
   off.test();
   on.test();
   once.test();
+  positions.test();
   scrollY.test();
   settings.test();
   start.test();
