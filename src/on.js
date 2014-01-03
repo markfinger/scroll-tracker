@@ -15,7 +15,6 @@ define([
 
     // Defer initialisation until the first element has been bound
     if (settings.initialiseOnBinding && !settings.hasInitialised) {
-      console.trace()
       init();
     }
 

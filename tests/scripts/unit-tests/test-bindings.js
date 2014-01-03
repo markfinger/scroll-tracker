@@ -19,11 +19,11 @@ define([
       deepEqual(viewport.bindings[0].element, document.body, 'Viewport binding should point to the body');
       equal(viewport.bindings[0].bindings['test'].length, 1, 'Viewport binding should contain one `test` binding');
 
-      viewport.bindings.set(document.body, 'test', function() {}, {fakeOptions: true});
+      viewport.bindings.set(document.body, 'test', function() {}, {checkTimeout: 50});
       deepEqual(
-        viewport.bindings[0].bindings['test'][1].options.fakeOptions,
+        viewport.bindings[0].checkTimeout === 50,
         true,
-        'Viewport binding should contain one `test` binding'
+        'Viewport binding should contain one `test` binding with a defined `checkTimeout`'
       );
     });
 

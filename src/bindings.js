@@ -1,7 +1,8 @@
 define([
   'lodash',
+  'viewport/src/settings',
   'viewport/src/utils'
-], function(_, utils) {
+], function(_, settings, utils) {
 
   // bindings = [
   //   {
@@ -10,10 +11,7 @@ define([
   //       enter: [
   //         {
   //           binding: <function>,
-  //           options: {
-  //             trackDelay: <number>,
-  //             once: <boolean>
-  //           },
+  //           once: <boolean>
   //           lastCheckedAt: -Infinity
   //         },
   //         ...
@@ -40,14 +38,22 @@ define([
   bindings.set = function set(element, name, binding, options) {
     var obj = bindings.get(element);
 
+    options = options || {};
+
     if (!obj) {
       obj = {
         element: element,
         bindings: {},
         position: utils.offsetOf(element),
-        state: {}
+        state: {},
+        checkTimeout: settings.checkTimeout,
+        lastCheckedAt: -Infinity
       };
       bindings.push(obj);
+    }
+
+    if (options.checkTimeout !== undefined) {
+      obj.checkTimeout = options.checkTimeout;
     }
 
     if (!obj.bindings[name]) {
@@ -56,8 +62,7 @@ define([
 
     obj.bindings[name].push({
       binding: binding,
-      options: options || {},
-      lastCheckedAt: -Infinity
+      once: options.once || false
     });
 
     return obj;
@@ -124,7 +129,7 @@ define([
 
       _.each(matchedBindings, function(binding) {
         var func = binding.binding;
-        if (binding.options.once) {
+        if (binding.once) {
           bindings.remove(element, name, func);
         }
         func(_.clone(obj.position));

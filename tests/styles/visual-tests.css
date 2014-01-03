@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+}
+
+.viewport-top,
+.viewport-bottom {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  max-height: 20%;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.viewport-top {
+  top: 0;
+}
+
+.viewport-bottom {
+  bottom: 0;
+}
+
+.viewport-middle {
+  position: fixed;
+  top: 50%;
+  width: 100%;
+  border-bottom: 1px dashed maroon;
+}

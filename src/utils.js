@@ -35,10 +35,6 @@ define([
 
     var offset = element.offset();
 
-    if (!offset) {
-      console.log(element[0], offset)
-    }
-
     if (settings.topPadding) {
       offset.top -= settings.topPadding;
     }

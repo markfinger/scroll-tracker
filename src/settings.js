@@ -6,7 +6,11 @@ define({
   // while a negative number lowers the bottom of the viewport
   bottomPadding: 0,
   // Enforced timeout between checks on an element
-  trackDelay: 100,
+  checkTimeout: 100,
+  // Enforced delay between calls to the scroll handler
+  onScrollThrottle: 10,
+  // Enforced debounced delay on calls to the resize handler
+  onResizeDebounce: 100,
   // Event namespace used to preserve control over jQuery events
   eventNamespace: '.viewport',
   // Initialise when bindings are added
