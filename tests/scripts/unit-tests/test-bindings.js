@@ -11,6 +11,8 @@ define([
       deepEqual(viewport.bindings, [], 'Viewport bindings should be an empty array.');
     });
 
+    QUnit.module('viewport.bindings.set');
+
     QUnit.test('set binding', function() {
       viewport.bindings.set(document.body, 'test', function() {});
       equal(viewport.bindings.length, 1, 'Viewport bindings should contain 1 entry');
@@ -24,6 +26,8 @@ define([
         'Viewport binding should contain one `test` binding'
       );
     });
+
+    QUnit.module('viewport.bindings.get');
 
     QUnit.test('get binding', function() {
       var testFunction = function() {};
@@ -39,6 +43,8 @@ define([
         'Viewport binding\'s first binding should point to the `testFunction`'
       );
     });
+
+    QUnit.module('viewport.bindings.remove');
 
     QUnit.test('remove binding', function() {
       viewport.bindings.set(document.body, 'test', function() {});
@@ -80,6 +86,8 @@ define([
         'Unbinding via a function will leave other functions intact'
       );
     });
+
+    QUnit.module('viewport.bindings.clean');
 
     QUnit.test('clean binding', function() {
       viewport.bindings.set(document.body, 'test', function() {});

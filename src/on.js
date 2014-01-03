@@ -3,7 +3,7 @@ define([
   'viewport/src/init',
   'viewport/src/settings',
   'viewport/src/start'
-], function(bindings, init, settings, start) {
+], function(bindings, init, settings) {
 
   return function on (element, name, binding, options) {
 
@@ -14,12 +14,9 @@ define([
     var obj = bindings.set(element, name, binding, options);
 
     // Defer initialisation until the first element has been bound
-    if (!settings.hasInitialised) {
+    if (settings.initialiseOnBinding && !settings.hasInitialised) {
+      console.trace()
       init();
-    }
-
-    if (!settings.hasBoundEvents) {
-      start();
     }
 
     return obj;

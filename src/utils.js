@@ -48,26 +48,21 @@ define([
     return offset;
   };
 
-  var positionOf = function(element) {
-
+  var viewportPosition = function() {
     var _scrollY = scrollY();
     var _height = height();
 
-    return _.extend(
-      {
-        viewportTop: _scrollY,
-        viewportBottom: _scrollY + _height,
-        viewportHeight: _height
-      },
-      offsetOf(element)
-    );
-
+    return {
+      top: _scrollY,
+      bottom: _scrollY + _height,
+      height: _height
+    };
   };
 
   return {
     scrollY: scrollY,
     height: height,
     offsetOf: offsetOf,
-    positionOf: positionOf
+    viewportPosition: viewportPosition
   };
 });

@@ -16,7 +16,7 @@ define([
       viewport.on(document.body, 'enter', function() {
         ok(true, 'Fired binding.');
       });
-      viewport.trigger(document.body, 'enter');
+      viewport.bindings.trigger(document.body, 'enter');
     });
 
     QUnit.test('Adds bindings to `viewport.bindings', function() {
@@ -35,8 +35,8 @@ define([
 
       equal(viewport.bindings.length, 1, '`viewport.bindings.length` should be 1');
 
-      viewport.trigger(document.body, 'enter');
-      viewport.trigger(document.body, 'exit');
+      viewport.bindings.trigger(document.body, 'enter');
+      viewport.bindings.trigger(document.body, 'exit');
     });
 
     QUnit.test('Multiple bindings to the same event do not override one another', 4, function() {
@@ -54,10 +54,12 @@ define([
         'the body should have 2 bindings to the enter event'
       );
 
-      viewport.trigger(document.body, 'enter');
+      viewport.bindings.trigger(document.body, 'enter');
     });
 
     QUnit.test('Binding an element causes events to be bound', function() {
+      viewport.settings.initialiseOnBinding = true;
+
       equal(viewport.settings.hasBoundEvents, false, 'events have not been bound');
 
       viewport.on(document.body, 'enter', function(){});

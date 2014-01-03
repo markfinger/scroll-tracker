@@ -13,8 +13,9 @@ define([
   //           options: {
   //             trackDelay: <number>,
   //             once: <boolean>
-  //           }
-  //         }
+  //           },
+  //           lastCheckedAt: -Infinity
+  //         },
   //         ...
   //       ],
   //       ...
@@ -22,27 +23,29 @@ define([
   //     position: {
   //       top: <number>,
   //       bottom: <number>
-  //     }
+  //     },
+  //     state: {}
   //   },
   //   ...
   // ];
 
   var bindings = [];
 
-  bindings.get = function(element) {
+  bindings.get = function get(element) {
     return _.find(bindings, function(obj) {
       return obj.element === element;
     });
   };
 
-  bindings.set = function(element, name, binding, options) {
+  bindings.set = function set(element, name, binding, options) {
     var obj = bindings.get(element);
 
     if (!obj) {
       obj = {
         element: element,
         bindings: {},
-        position: utils.offsetOf(element)
+        position: utils.offsetOf(element),
+        state: {}
       };
       bindings.push(obj);
     }
@@ -53,13 +56,14 @@ define([
 
     obj.bindings[name].push({
       binding: binding,
-      options: options || {}
+      options: options || {},
+      lastCheckedAt: -Infinity
     });
 
     return obj;
   };
 
-  bindings.clean = function() {
+  bindings.clean = function clean() {
     // Cleans out the bindings to remove empty bindings and objects
 
     _.each(bindings, function(binding) {
@@ -76,33 +80,63 @@ define([
     });
   };
 
-  bindings.remove = function(element, name, binding) {
+  bindings.remove = function remove(element, name, binding) {
     var obj = bindings.get(element);
-    var match = false;
+    var removed = false;
 
     if (obj) {
       if (binding) {
         if (_.has(obj.bindings, name)) {
-          var removed = _.remove(obj.bindings[name], function(obj) {
+          var bindingsRemoved = _.remove(obj.bindings[name], function(obj) {
             return obj.binding === binding;
           });
-          if (removed.length) {
-            match = true;
+          if (bindingsRemoved.length) {
+            removed = true;
           }
         }
       } else if (name) {
         if (_.has(obj.bindings, name)) {
           delete obj.bindings[name];
-          match = true;
+          removed = true;
         }
       } else {
         _.remove(bindings, obj);
-        match = true;
+        removed = true;
       }
       bindings.clean();
     }
 
-    return match;
+    return removed;
+  };
+
+  bindings.trigger = function trigger(element, name, binding) {
+    var obj = bindings.get(element);
+
+    if (obj && _.has(obj.bindings, name)) {
+
+      var matchedBindings = obj.bindings[name];
+
+      if (binding) {
+        matchedBindings = _.filter(matchedBindings, function(obj) {
+          return obj.binding === binding;
+        });
+      }
+
+      _.each(matchedBindings, function(binding) {
+        var func = binding.binding;
+        if (binding.options.once) {
+          bindings.remove(element, name, func);
+        }
+        func(_.clone(obj.position));
+      });
+
+      if (matchedBindings.length) {
+        return true;
+      }
+
+    }
+
+    return false;
   };
 
   return bindings;

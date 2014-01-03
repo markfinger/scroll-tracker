@@ -16,7 +16,7 @@ define([
       viewport.once(document.body, 'enter', function() {
         ok(true, 'Fired binding.');
       });
-      viewport.trigger(document.body, 'enter');
+      viewport.bindings.trigger(document.body, 'enter');
     });
 
     QUnit.test('Binding only fires once', 1, function() {
@@ -24,14 +24,14 @@ define([
         ok(true, 'Fired binding, this should only happen once.');
       });
 
-      viewport.trigger(document.body, 'enter');
-      viewport.trigger(document.body, 'enter');
+      viewport.bindings.trigger(document.body, 'enter');
+      viewport.bindings.trigger(document.body, 'enter');
     });
 
     QUnit.test('Removes binding after execution', function() {
       viewport.once(document.body, 'enter', function() { });
 
-      viewport.trigger(document.body, 'enter');
+      viewport.bindings.trigger(document.body, 'enter');
 
       equal(viewport.bindings.length, 0, 'There should be no bindings on the body');
     });

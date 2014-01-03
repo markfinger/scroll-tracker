@@ -9,6 +9,8 @@ define({
   trackDelay: 100,
   // Event namespace used to preserve control over jQuery events
   eventNamespace: '.viewport',
+  // Initialise when bindings are added
+  initialiseOnBinding: true,
   // Denotes that initialisation has completed
   hasInitialised: false,
   // Denotes that event listeners have been bound

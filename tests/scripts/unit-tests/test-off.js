@@ -21,7 +21,7 @@ define([
     });
 
     QUnit.test('Returns true for unbound elements', function() {
-      viewport.on(document.body, 'test', function() {});
+      viewport.on(document.body, 'inside', function() {});
 
       // sanity check
       equal(
