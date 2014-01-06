@@ -8,7 +8,7 @@ define([
 
   return function check(element) {
 
-    var bindingsToCheck;
+    var bindingsToCheck = bindings;
 
     if (_.isElement(element)) {
       var binding = bindings.get(element);
@@ -16,8 +16,6 @@ define([
         return;
       }
       bindingsToCheck = [binding];
-    } else {
-      bindingsToCheck = bindings;
     }
 
     var currentTime = _.now();
