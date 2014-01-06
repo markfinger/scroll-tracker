@@ -21,7 +21,7 @@ define([
     }
 
     var currentTime = _.now();
-    var viewportPosition = utils.viewportPosition();
+    var viewportPosition = utils.position();
 
     _(bindingsToCheck)
       .filter(function(obj) {

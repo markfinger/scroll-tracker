@@ -17,7 +17,7 @@ define([
 
     data = data || {};
     data.position = data.position || utils.offsetOf(element);
-    data.viewport = data.viewport || utils.viewportPosition();
+    data.viewport = data.viewport || utils.position();
     if (!data.state) {
       var binding = bindings.get(element);
       if (binding) {

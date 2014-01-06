@@ -41,7 +41,7 @@ define([
   });
 
   var test = function() {
-    QUnit.module('testDone method');
+    QUnit.module('QUnit testDone handler');
 
     QUnit.test('Initial test and populate', function() {
       equal(viewport.bindings.length, 0, 'viewport.bindings length should be 0.');
@@ -50,7 +50,7 @@ define([
       equal(viewport.bindings.length, 1, 'viewport.bindings length should be 1.');
     });
 
-    QUnit.test('Test that the testDone occured', function() {
+    QUnit.test('Confirm that testDone completed', function() {
       equal(viewport.bindings.length, 0, 'viewport.bindings length should be 0.');
     });
   };

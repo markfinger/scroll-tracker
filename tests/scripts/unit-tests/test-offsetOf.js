@@ -7,7 +7,7 @@ define([
 
     QUnit.module('viewport.offsetOf');
 
-    QUnit.test('Provides the correct value', function() {
+    QUnit.test('Provides the correct values', function() {
       var qunit = $('#qunit');
       var offset = viewport.offsetOf(qunit);
       equal(offset.top, qunit.offset().top, 'contains a top property with the correct value.');

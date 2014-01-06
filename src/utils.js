@@ -45,7 +45,7 @@ define([
     return offset;
   };
 
-  var viewportPosition = function() {
+  var position = function() {
     var _scrollY = scrollY();
     var _height = height();
 
@@ -60,6 +60,6 @@ define([
     scrollY: scrollY,
     height: height,
     offsetOf: offsetOf,
-    viewportPosition: viewportPosition
+    position: position
   };
 });
