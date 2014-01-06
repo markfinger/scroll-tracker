@@ -61,7 +61,7 @@ define([
   });
 
   defineCondition('intersectingMiddle', function(element, data) {
-    var viewportMiddle = data.viewport.height / 2;
+    var viewportMiddle = data.viewport.top + (data.viewport.height / 2);
     return (
       data.position.top <= viewportMiddle &&
       data.position.bottom >= viewportMiddle
