@@ -40,6 +40,7 @@ define([
     }
 
     offset.bottom = offset.top + element.outerHeight();
+    offset.right = offset.left + element.outerWidth();
 
     return offset;
   };

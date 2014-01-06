@@ -6,6 +6,7 @@ define([
   'unit-tests/test-check',
   'unit-tests/test-height',
   'unit-tests/test-off',
+  'unit-tests/test-offsetOf',
   'unit-tests/test-on',
   'unit-tests/test-once',
   'unit-tests/test-conditions',
@@ -14,7 +15,7 @@ define([
   'unit-tests/test-start',
   'unit-tests/test-stop',
   'unit-tests/test-update'
-], function(QUnit, setup, bindings, bindingsTrigger, check, height, off, on, once, conditions, scrollY, settings, start, stop, update) {
+], function(QUnit, setup, bindings, bindingsTrigger, check, height, off, offsetOf, on, once, conditions, scrollY, settings, start, stop, update) {
 
   // TODO
   // check, maybe rename to tracker..?
@@ -25,6 +26,7 @@ define([
   check.test();
   height.test();
   off.test();
+  offsetOf.test();
   on.test();
   once.test();
   conditions.test();
