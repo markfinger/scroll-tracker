@@ -7,17 +7,77 @@ define([
   var container;
   var viewportTopElement;
   var viewportBottomElement;
+  var elements = {};
+  var quadrants = [];
 
   var initViewportOffsets = function() {
     viewport.settings.topPadding = viewportTopElement.outerHeight();
     viewport.settings.bottomPadding = viewportBottomElement.outerHeight();
   };
 
-  // viewport.on(element, '!enter', function(){});
-  // viewport.on(element, '!intersectingMiddle', function(){});
+  var insertElements = function() {
+    var conditions = _.keys(viewport.conditions);
+
+    _.each(conditions, function(condition) {
+      _.each(_.range(3), function() {
+        elements[condition] = elements[condition] || [];
+        var element = $(
+          '<div class="test-element ' + condition + '">' +
+            condition +
+          '</div>'
+        );
+        elements[condition].push(element);
+        container.append(element);
+      });
+    });
+  };
+
+  var positionElements = function() {
+
+    var shuffledElements = _.shuffle(_.flatten(_.values(elements)));
+    var first = _.first(shuffledElements);
+    var rest = _.rest(shuffledElements);
+
+    var elementHeight = first.outerHeight();
+    var elementWidth = Math.max.apply(null, _.invoke(shuffledElements, 'outerWidth'));
+
+    _.each(rest, function(element) {
+      element.css({
+        top: _.random(window.innerHeight * 5 - elementHeight),
+        left: _.random(window.innerWidth - elementWidth)
+      });
+    });
+  };
+
+  var bindElements = function() {
+    _.each(elements, function(elementsToBind, binding) {
+      _.each(elementsToBind, function($element) {
+        var element = $element.get(0);
+        var animating = false;
+
+        viewport.on(element, binding, function() {
+          if (!animating) {
+            requestAnimationFrame(function() {
+              element.style.webkitAnimationName = 'colourPulse';
+              animating = true;
+            });
+          }
+        });
+
+        $element.on('animationend webkitAnimationEnd oanimationend MSAnimationEnd', function() {
+          requestAnimationFrame(function() {
+            element.style.webkitAnimationName = '';
+            animating = false;
+          });
+        });
+      });
+    });
+  };
 
   var setBindings = function() {
     $(window).on('resize', _.debounce(initViewportOffsets, 10));
+
+    bindElements();
   };
 
   var init = function() {
@@ -27,7 +87,12 @@ define([
 
     initViewportOffsets();
 
+    insertElements();
+    positionElements();
+
     setBindings();
+
+    viewport.check();
   };
 
   return {

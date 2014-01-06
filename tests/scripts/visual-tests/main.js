@@ -1,6 +1,7 @@
 define([
+  'visual-tests/shim',
   'visual-tests/scroll-tracker'
-], function(scrollTracker) {
-
+], function(shim, scrollTracker) {
+  shim();
   scrollTracker.init();
 });
