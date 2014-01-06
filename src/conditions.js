@@ -76,7 +76,10 @@ define([
   });
 
   defineCondition('contained', function(element, data) {
-    return !is(element, 'notContained', data);
+    return (
+      data.position.top >= data.viewport.top &&
+      data.position.bottom <= data.viewport.bottom
+    );
   });
 
   defineCondition('enter', function(element, data) {
@@ -94,7 +97,7 @@ define([
 
   defineCondition('exit', function(element, data) {
     var state = data.state;
-    if (is(element, 'outside', data)) {
+    if (is(element, '!inside', data)) {
       if (
         state.inViewport === true ||
         state.inViewport === undefined
