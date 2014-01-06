@@ -7,10 +7,8 @@ define([
 
   var is = function is(element, name, data) {
 
-    var not = false;
     if (name[0] === '!') {
-      name = name.slice(1);
-      not = true;
+      return !is(element, name.slice(1), data);
     }
 
     if (conditions[name] === undefined) {
@@ -29,13 +27,7 @@ define([
       }
     }
 
-    var result = conditions[name](element, data);
-
-    if (not) {
-      return !result;
-    }
-
-    return result;
+    return conditions[name](element, data);
   };
 
   var defineCondition = function defineCondition(name, test) {
