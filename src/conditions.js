@@ -54,15 +54,11 @@ define([
     return data.position.top > data.viewport.bottom;
   });
 
-  defineCondition('outside', function(element, data) {
-    return (
+  defineCondition('inside', function(element, data) {
+    return !(
       is(element, 'above', data) ||
       is(element, 'below', data)
     );
-  });
-
-  defineCondition('inside', function(element, data) {
-    return !(is(element, 'outside', data));
   });
 
   defineCondition('intersectingTop', function(element, data) {
@@ -84,13 +80,6 @@ define([
     return (
       data.position.top <= data.viewport.bottom &&
       data.position.bottom >= data.viewport.bottom
-    );
-  });
-
-  defineCondition('notContained', function(element, data) {
-    return (
-      data.position.top < data.viewport.top &&
-      data.position.bottom > data.viewport.bottom
     );
   });
 

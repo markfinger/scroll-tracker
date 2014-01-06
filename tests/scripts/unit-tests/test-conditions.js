@@ -12,11 +12,9 @@ define([
       ok(_.contains(keys, 'above'), 'above has been bound');
       ok(_.contains(keys, 'below'), 'below has been bound');
       ok(_.contains(keys, 'inside'), 'inside has been bound');
-      ok(_.contains(keys, 'outside'), 'outside has been bound');
       ok(_.contains(keys, 'intersectingTop'), 'intersectingTop has been bound');
       ok(_.contains(keys, 'intersectingMiddle'), 'intersectingMiddle has been bound');
       ok(_.contains(keys, 'intersectingBottom'), 'intersectingBottom has been bound');
-      ok(_.contains(keys, 'notContained'), 'notContained has been bound');
       ok(_.contains(keys, 'contained'), 'contained has been bound');
       ok(_.contains(keys, 'enter'), 'enter has been bound');
       ok(_.contains(keys, 'exit'), 'exit has been bound');
@@ -35,7 +33,7 @@ define([
       ok(viewport.is(document.body, 'inside'), 'is the body in the viewport');
       ok(viewport.is(document.body, 'intersectingMiddle'), 'does the body intersect the middle of the viewport');
       ok(viewport.is(document.body, 'intersectingBottom'), 'does the body intersect the bottom of the viewport');
-      ok(!viewport.is(document.body, 'outside'), 'check if the body is not in the viewport and expect false');
+      ok(!viewport.is(document.body, '!inside'), 'check if the body is not in the viewport and expect false');
     });
 
     QUnit.test('Respects the `!` (not) operator', function() {
