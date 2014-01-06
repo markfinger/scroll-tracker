@@ -132,7 +132,10 @@ define([
         if (binding.once) {
           bindings.remove(element, name, func);
         }
-        func(_.clone(obj.position));
+        func({
+          position: _.clone(obj.position),
+          element: element
+        });
       });
 
       if (matchedBindings.length) {

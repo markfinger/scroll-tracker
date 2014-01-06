@@ -1,7 +1,8 @@
 define([
   'QUnit',
+  'lodash',
   'viewport'
-], function(QUnit, viewport) {
+], function(QUnit, _, viewport) {
 
   var test = function() {
     QUnit.module('viewport.bindings.trigger');
@@ -36,6 +37,14 @@ define([
       viewport.on(document.body, 'test', func2);
       viewport.on(document.head, 'test', func2);
       viewport.bindings.trigger(document.body, 'test', func1);
+    });
+
+    QUnit.test('Passes the element and the element\'s position to the binding', 2, function() {
+      viewport.on(document.body, 'test', function(obj) {
+        ok(_.isElement(obj.element), 'Received the element.');
+        ok(_.isObject(obj.position), 'Received the element position.');
+      });
+      viewport.bindings.trigger(document.body, 'test');
     });
 
   };
