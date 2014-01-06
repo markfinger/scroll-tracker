@@ -38,6 +38,13 @@ define([
       ok(!viewport.is(document.body, 'outside'), 'check if the body is not in the viewport and expect false');
     });
 
+    QUnit.test('Respects the `!` (not) operator', function() {
+      var inside = viewport.is(document.body, 'inside');
+      var notInside = viewport.is(document.body, '!inside');
+      notEqual(inside, notInside, 'inside and !inside should not be equal');
+      ok(notInside === !inside, '!inside should be the negation of inside');
+    });
+
 
     QUnit.module('viewport.define');
 
