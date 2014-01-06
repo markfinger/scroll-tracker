@@ -4,10 +4,16 @@ define([
   'viewport/src/settings'
 ], function($, _, settings) {
 
-  var scrollY = function() {
-    // Cross-browser determination of the the amount of pixels scrolled
+  var scrollX = function() {
+    return (window.pageXOffset !== undefined) ? window.pageXOffset : (document.documentElement || document.body.parentNode || document.body).scrollLeft;
+  };
 
+  var scrollY = function() {
     return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+  };
+
+  var width = function() {
+    return window.innerWidth;
   };
 
   var height = function() {
@@ -46,18 +52,25 @@ define([
   };
 
   var position = function() {
+    var _scrollX = scrollX();
     var _scrollY = scrollY();
+    var _width = width();
     var _height = height();
 
     return {
       top: _scrollY,
       bottom: _scrollY + _height,
+      left: _scrollX,
+      right: _scrollX + _width,
+      width: _width,
       height: _height
     };
   };
 
   return {
+    scrollX: scrollX,
     scrollY: scrollY,
+    width: width,
     height: height,
     offsetOf: offsetOf,
     position: position

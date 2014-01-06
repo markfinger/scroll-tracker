@@ -11,7 +11,10 @@ define([
       var position = viewport.position();
       equal(position.top, viewport.scrollY(), 'contains a top property with the correct value.');
       equal(position.bottom, viewport.scrollY() + viewport.height(), 'contains a bottom property with the correct value.');
+      equal(position.left, viewport.scrollX(), 'contains a bottom property with the correct value.');
+      equal(position.right, viewport.scrollX() + viewport.width(), 'contains a bottom property with the correct value.');
       equal(position.height, viewport.height(), 'contains a height property with the correct value.');
+      equal(position.width, viewport.width(), 'contains a height property with the correct value.');
     });
 
   };
