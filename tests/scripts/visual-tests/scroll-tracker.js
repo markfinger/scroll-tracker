@@ -47,6 +47,16 @@ define([
     });
   };
 
+  var _setAnimationName = function(element, name) {
+    if (element.style.animationName !== undefined) {
+      element.style.animationName = name;
+    } else if (element.style.webkitAnimationName !== undefined) {
+      element.style.webkitAnimationName = name;
+    } else if (element.style.MozAnimationName !== undefined) {
+      element.style.MozAnimationName = name;
+    }
+  };
+
   var bindElements = function() {
     _.each(elements, function(elementsToBind, binding) {
       _.each(elementsToBind, function($element) {
@@ -56,7 +66,7 @@ define([
         viewport.on(element, binding, function() {
           if (!animating) {
             requestAnimationFrame(function() {
-              element.style.webkitAnimationName = 'colourPulse';
+              _setAnimationName(element, 'colourPulse');
               animating = true;
             });
           }
@@ -64,7 +74,7 @@ define([
 
         $element.on('animationend webkitAnimationEnd oanimationend MSAnimationEnd', function() {
           requestAnimationFrame(function() {
-            element.style.webkitAnimationName = '';
+            _setAnimationName(element, '');
             animating = false;
           });
         });
