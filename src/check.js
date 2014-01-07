@@ -7,6 +7,10 @@ define([
 ], function(_, bindings, conditions, settings, utils) {
 
   return function check(element) {
+    // Checks the conditions of each bound Element and, if successful,
+    // triggers any Function bound to that Element and condition.
+    // Accepts an optional Element argument, which restricts the checks
+    // to that Element only.
 
     var bindingsToCheck = bindings;
 
@@ -28,7 +32,7 @@ define([
       .each(function(obj) {
         obj.lastCheckedAt = currentTime;
 
-        var bindingNames = _.keys(obj.bindings);
+        var conditionNames = _.keys(obj.bindings);
 
         var element = obj.element;
 
@@ -38,9 +42,9 @@ define([
           state: obj.state
         };
 
-        _.each(bindingNames, function(name) {
-          if (conditions.is(element, name, data)) {
-            bindings.trigger(element, name);
+        _.each(conditionNames, function(condition) {
+          if (conditions.is(element, condition, data)) {
+            bindings.trigger(element, condition);
           }
         });
     });

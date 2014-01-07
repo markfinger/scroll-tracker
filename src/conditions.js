@@ -5,14 +5,25 @@ define([
 
   var conditions = {};
 
-  var is = function is(element, name, data) {
+  var is = function is(element, condition, data) {
+    // Indicates if an Element's position in the viewport matches
+    // a specific condition
+    //
+    // Accepts two arguments:
+    //   element: the Element which viewport will check
+    //   condition: a string identifying the condition that viewport
+    //     will check for
+    //   data: an optional Object which contains precomputed information
+    //     about an element's position and state, as well as the
+    //     viewport's position. Precomputing this Object can be useful
+    //     if you are trying to optimise repetitive calls to `is`.
 
-    if (name[0] === '!') {
-      return !is(element, name.slice(1), data);
+    if (condition[0] === '!') {
+      return !is(element, condition.slice(1), data);
     }
 
-    if (conditions[name] === undefined) {
-      throw new Error('Undefined condition: ' + name);
+    if (conditions[condition] === undefined) {
+      throw new Error('Undefined condition: ' + condition);
     }
 
     data = data || {};
@@ -27,14 +38,14 @@ define([
       }
     }
 
-    return conditions[name](element, data);
+    return conditions[condition](element, data);
   };
 
-  var defineCondition = function defineCondition(name, test) {
-    if (!conditions[name]) {
-      conditions[name] = test;
+  var defineCondition = function defineCondition(condition, binding) {
+    if (!conditions[condition]) {
+      conditions[condition] = binding;
     } else {
-      throw new Error('A condition has already been defined with the name "' + name + '"');
+      throw new Error('A condition has already been defined with the name "' + condition + '"');
     }
   };
 

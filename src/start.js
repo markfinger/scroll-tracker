@@ -19,6 +19,8 @@ define([
   onResize = _.debounce(onResize, settings.onResizeDebounce);
 
   return function start() {
+    // Add event handlers that viewport uses to track scroll
+    // and resize events that are fired by the browser.
     if (!settings.hasBoundEvents) {
       $(window).on('scroll' + settings.eventNamespace, onScroll);
       $(window).on('resize' + settings.eventNamespace, onResize);

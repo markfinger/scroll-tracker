@@ -1,3 +1,6 @@
+// Configurable values and flags which alter the
+// behaviour of viewport
+
 define({
   // A positive number lowers the top of the viewport,
   // while a negative number raises the top of the viewport

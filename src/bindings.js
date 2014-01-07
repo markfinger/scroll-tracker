@@ -35,7 +35,7 @@ define([
     });
   };
 
-  bindings.set = function set(element, name, binding, options) {
+  bindings.set = function set(element, condition, binding, options) {
     var obj = bindings.get(element);
 
     options = options || {};
@@ -56,11 +56,11 @@ define([
       obj.checkTimeout = options.checkTimeout;
     }
 
-    if (!obj.bindings[name]) {
-      obj.bindings[name] = [];
+    if (!obj.bindings[condition]) {
+      obj.bindings[condition] = [];
     }
 
-    obj.bindings[name].push({
+    obj.bindings[condition].push({
       binding: binding,
       once: options.once || false
     });
@@ -85,23 +85,23 @@ define([
     });
   };
 
-  bindings.remove = function remove(element, name, binding) {
+  bindings.remove = function remove(element, condition, binding) {
     var obj = bindings.get(element);
     var removed = false;
 
     if (obj) {
       if (binding) {
-        if (_.has(obj.bindings, name)) {
-          var bindingsRemoved = _.remove(obj.bindings[name], function(obj) {
+        if (_.has(obj.bindings, condition)) {
+          var bindingsRemoved = _.remove(obj.bindings[condition], function(obj) {
             return obj.binding === binding;
           });
           if (bindingsRemoved.length) {
             removed = true;
           }
         }
-      } else if (name) {
-        if (_.has(obj.bindings, name)) {
-          delete obj.bindings[name];
+      } else if (condition) {
+        if (_.has(obj.bindings, condition)) {
+          delete obj.bindings[condition];
           removed = true;
         }
       } else {
@@ -114,12 +114,12 @@ define([
     return removed;
   };
 
-  bindings.trigger = function trigger(element, name, binding) {
+  bindings.trigger = function trigger(element, condition, binding) {
     var obj = bindings.get(element);
 
-    if (obj && _.has(obj.bindings, name)) {
+    if (obj && _.has(obj.bindings, condition)) {
 
-      var matchedBindings = obj.bindings[name];
+      var matchedBindings = obj.bindings[condition];
 
       if (binding) {
         matchedBindings = _.filter(matchedBindings, function(obj) {
@@ -130,7 +130,7 @@ define([
       _.each(matchedBindings, function(binding) {
         var func = binding.binding;
         if (binding.once) {
-          bindings.remove(element, name, func);
+          bindings.remove(element, condition, func);
         }
         func({
           position: _.clone(obj.position),
