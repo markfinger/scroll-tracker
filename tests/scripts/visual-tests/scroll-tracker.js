@@ -35,13 +35,11 @@ define([
   var positionElements = function() {
 
     var shuffledElements = _.shuffle(_.flatten(_.values(elements)));
-    var first = _.first(shuffledElements);
-    var rest = _.rest(shuffledElements);
 
-    var elementHeight = first.outerHeight();
+    var elementHeight = shuffledElements[0].outerHeight();
     var elementWidth = Math.max.apply(null, _.invoke(shuffledElements, 'outerWidth'));
 
-    _.each(rest, function(element) {
+    _.each(shuffledElements, function(element) {
       element.css({
         top: _.random(window.innerHeight * 5 - elementHeight),
         left: _.random(window.innerWidth - elementWidth)
