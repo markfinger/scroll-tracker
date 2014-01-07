@@ -67,12 +67,21 @@ define([
     };
   };
 
+  var page = function() {
+    var $document = $(document);
+    return {
+      height: $document.height(),
+      width: $document.width()
+    };
+  };
+
   return {
     scrollX: scrollX,
     scrollY: scrollY,
     width: width,
     height: height,
     offsetOf: offsetOf,
-    position: position
+    position: position,
+    page: page
   };
 });
