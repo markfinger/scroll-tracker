@@ -1,6 +1,6 @@
 {
   "name": "viewport",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "description": "Utilities for working within the browser's viewport",
   "homepage": "http://github.com/markfinger/viewport",
   "repository": {
