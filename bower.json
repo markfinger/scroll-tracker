@@ -14,8 +14,9 @@
     "components"
   ],
   "dependencies": {
+    "requirejs": ">=2.1.10",
     "jquery": ">=1.10.2",
-    "requirejs": ">=2.1.9"
+    "lodash": ">=2.4.1"
   },
   "keywords": [
     "viewport",
