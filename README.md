@@ -32,16 +32,15 @@ Viewport
 
 
   // Bindings can be bound to variety of positions and conditions, including:
-
-  //  enter
-  //  exit
-  //  inside
-  //  above
-  //  below
-  //  contained
-  //  intersectingTop
-  //  intersectingMiddle
-  //  intersectingBottom
+  // - enter
+  // - exit
+  // - inside
+  // - above
+  // - below
+  // - contained
+  // - intersectingTop
+  // - intersectingMiddle
+  // - intersectingBottom
 
 
 
