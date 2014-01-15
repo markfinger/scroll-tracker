@@ -5,8 +5,15 @@ Viewport
 
 ```javascript
   // Basic usage
+  
+  require.config({
+    packages: [{
+      name: 'viewport',
+      location: 'path/to/package'
+    }]
+  });
 
-  define(['viewport']. function(viewport) {
+  define(['viewport'], function(viewport) {
 
     // The binding will be called when the element enters the viewport
     viewport.on(someElement, 'enter', someFunction);
