@@ -1,7 +1,7 @@
 {
   "name": "viewport",
   "version": "0.1.0",
-  "description": "Utilities for working within the browser's viewport",
+  "description": "Scroll tracker and viewport utilities",
   "homepage": "http://github.com/markfinger/viewport",
   "repository": {
     "type": "git",
@@ -20,9 +20,11 @@
   },
   "keywords": [
     "viewport",
+    "scroll",
+    "tracker",
+    "tracking",
     "utilities",
     "visible",
-    "elements",
-    "library"
+    "elements"
   ]
 }
