@@ -47,12 +47,14 @@ Viewport
   // Bindings can be bound to the negation of conditions by 
   // prepending an exclamation mark.
 
-  // Binds the function to a condition where the element is outside the viewport
+  // Binds the function to a condition where the element is 
+  // outside the viewport
   viewport.on(element, '!inside', someFunction);
 
 
 
-  // Additional conditions can be specified, see src/conditions.js for examples
+  // Additional conditions can be specified, 
+  // see src/conditions.js for examples
 
   viewport.defineCondition('someCondition', function(element, data) {
     // ...
