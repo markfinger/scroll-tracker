@@ -85,7 +85,7 @@ Viewport
   // from the document's top and left.
   viewport.offsetOf(element)
 
-  // Returns the viewport's dimensions and offset from the document's top and left.
+  // Returns the viewport's position and dimensions.
   viewport.position()
 
   // Returns the dimensions of the document
@@ -100,7 +100,7 @@ Viewport
   // Returns the width of the viewport
   viewport.width()
 
-  // Returns the height of the viewport, taking in to consideration
+  // Returns the height of the viewport, with respect to 
   // the `topPadding` and `bottomPadding` settings
   viewport.height()
 ```
