@@ -32,7 +32,8 @@ Viewport
 
 
 
-  // Bindings can be bound to the negation of conditions by prepending an exclamation mark.
+  // Bindings can be bound to the negation of conditions by 
+  // prepending an exclamation mark.
 
   // Binds the function to a condition where the element is outside the viewport
   viewport.on(element, '!inside', someFunction);
@@ -57,7 +58,8 @@ Viewport
 
 
 
-  // Calculations of positions can be offset, which is useful for working around fixed headers or footers
+  // Calculations of positions can be offset, which is useful 
+  // for working around fixed headers or footers
   viewport.settings.topPadding = $('fixed-nav').outerHeight();
   viewport.settings.bottomPadding = $('fixed-footer').outerHeight();
 
@@ -65,7 +67,8 @@ Viewport
 
   // A variety of utility methods exist for working around the viewport
 
-  // Returns an element's top, bottom, left, and right offsets from the document's top and left.
+  // Returns an element's top, bottom, left, and right offsets 
+  // from the document's top and left.
   viewport.offsetOf(element)
 
   // Returns the viewport's dimensions and offset from the document's top and left.
