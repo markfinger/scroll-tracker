@@ -14,7 +14,7 @@ define([
 
     var bindingsToCheck = bindings;
 
-    if (_.isElement(element)) {
+    if (element && _.isElement(element)) {
       var binding = bindings.get(element);
       if (!binding) {
         return;

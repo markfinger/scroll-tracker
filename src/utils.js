@@ -38,7 +38,7 @@ define([
   };
 
   var offsetOf = function(element) {
-    // Returns a superset of jQuery(element).offset which contains
+    // Returns a superset of jQuery(element).offset() which contains
     // the bottom and right offsets from the top and left edges of
     // the document respectively
 

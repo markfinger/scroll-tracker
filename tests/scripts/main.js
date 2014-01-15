@@ -1,7 +1,7 @@
 require.config({
   paths: {
     jquery: '../components/jquery/jquery',
-    lodash: '../components/lodash/lodash',
+    lodash: '../components/lodash/dist/lodash',
     QUnit: '../components/qunit/qunit/qunit'
   },
   shim: {
