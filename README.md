@@ -67,16 +67,16 @@ Viewport
   // Returns true if an element is inside the viewport
   viewport.is(element, 'inside');
 
-  // Returns true if an element is completely within the viewport
-  viewport.is(element, 'contained');
+  // Returns true if an element is not entirely within the viewport
+  viewport.is(element, '!contained');
 
 
 
   // Calculations of positions can be offset, which is useful 
   // for working around fixed headers or footers
 
-  viewport.settings.topPadding = $('fixed-nav').outerHeight();
-  viewport.settings.bottomPadding = $('fixed-footer').outerHeight();
+  viewport.settings.topPadding = $('.fixed-nav').outerHeight();
+  viewport.settings.bottomPadding = $('.fixed-footer').outerHeight();
 
 
 
