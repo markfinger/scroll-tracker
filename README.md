@@ -16,10 +16,17 @@ Viewport
   define(['viewport'], function(viewport) {
 
     // The binding will be called when the element enters the viewport
-    viewport.on(someElement, 'enter', someFunction);
+    viewport.on(element, 'enter', function(){});
 
     // The binding will be called when the element exits the viewport
-    viewport.on(someElement, 'exit', anotherFunction);
+    viewport.on(element, 'exit', function(){});
+    
+    // The binding will be called when the element intersects the top of the viewport
+    viewport.on(element, 'intersectingTop', function(){});
+    
+    // The binding will be called when the element is entirely within the viewport
+    viewport.on(element, 'contained', function(){});
+
 
   });
 
@@ -67,6 +74,7 @@ Viewport
 
   // Calculations of positions can be offset, which is useful 
   // for working around fixed headers or footers
+
   viewport.settings.topPadding = $('fixed-nav').outerHeight();
   viewport.settings.bottomPadding = $('fixed-footer').outerHeight();
 
