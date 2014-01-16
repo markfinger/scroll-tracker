@@ -35,7 +35,6 @@ require(['viewport'], function(viewport) {
   // The binding will be called when the element is entirely within the viewport
   viewport.on(element, 'contained', function(){});
 
-
 });
 ```
 
