@@ -1,8 +1,7 @@
 define([
   'jquery',
-  'lodash',
   'viewport/src/settings'
-], function($, _, settings) {
+], function($, settings) {
 
   var scrollX = function() {
     // Returns the distance between the left edges of the viewport and the document

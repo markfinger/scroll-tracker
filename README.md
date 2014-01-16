@@ -3,33 +3,45 @@ Viewport
 
 **Scroll tracker and viewport utilities.**
 
+### Installation and basic usage
+
+Install via bower: `bower install --save viewport`
+
 ```javascript
-  // Basic usage
-  
-  require.config({
-    packages: [{
-      name: 'viewport',
-      location: 'path/to/package'
-    }]
-  });
+// Add to require config
 
-  define(['viewport'], function(viewport) {
+require.config({
+  packages: [{
+    name: 'viewport',
+    location: '/path/to/bower_components/viewport'
+  }]
+});
+```
 
-    // The binding will be called when the element enters the viewport
-    viewport.on(element, 'enter', function(){});
+```javascript
+// Access the package in AMD modules
 
-    // The binding will be called when the element exits the viewport
-    viewport.on(element, 'exit', function(){});
+require(['viewport'], function(viewport) {
+
+  // The binding will be called when the element enters the viewport
+  viewport.on(element, 'enter', function(){});
+
+  // The binding will be called when the element exits the viewport
+  viewport.on(element, 'exit', function(){});
     
-    // The binding will be called when the element intersects the top of the viewport
-    viewport.on(element, 'intersectingTop', function(){});
+  // The binding will be called when the element intersects the top of the viewport
+  viewport.on(element, 'intersectingTop', function(){});
     
-    // The binding will be called when the element is entirely within the viewport
-    viewport.on(element, 'contained', function(){});
-
-  });
+  // The binding will be called when the element is entirely within the viewport
+  viewport.on(element, 'contained', function(){});
 
 
+});
+```
+
+### Documentation by example
+
+```javascript
 
   // Bindings can be bound to variety of positions and conditions, including:
   // - enter
