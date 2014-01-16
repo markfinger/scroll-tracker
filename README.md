@@ -13,7 +13,7 @@ Install via bower: `bower install --save viewport`
 require.config({
   packages: [{
     name: 'viewport',
-    location: 'bower_components/viewport'
+    location: '/path/to/bower_components/viewport'
   }]
 });
 ```
