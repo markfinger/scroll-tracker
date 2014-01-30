@@ -1,7 +1,7 @@
 define([
-  'viewport/src/bindings',
-  'viewport/src/init',
-  'viewport/src/settings'
+  './bindings',
+  './init',
+  './settings'
 ], function(bindings, init, settings) {
 
   /*

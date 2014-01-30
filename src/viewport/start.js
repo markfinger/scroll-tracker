@@ -1,9 +1,9 @@
 define([
   'jquery',
   'lodash',
-  'viewport/src/check',
-  'viewport/src/settings',
-  'viewport/src/update'
+  './check',
+  './settings',
+  './update'
 ], function($, _, check, settings, update) {
 
   var onScroll = function onScroll() {

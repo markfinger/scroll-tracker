@@ -1,7 +1,7 @@
 define([
   'lodash',
-  'viewport/src/settings',
-  'viewport/src/utils'
+  './settings',
+  './utils'
 ], function(_, settings, utils) {
 
   // bindings = [

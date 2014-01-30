@@ -1,9 +1,9 @@
 define([
   'lodash',
-  'viewport/src/bindings',
-  'viewport/src/conditions',
-  'viewport/src/settings',
-  'viewport/src/utils'
+  './bindings',
+  './conditions',
+  './settings',
+  './utils'
 ], function(_, bindings, conditions, settings, utils) {
 
   return function check(element) {

@@ -1,5 +1,5 @@
 define([
-  'viewport/src/bindings'
+  './bindings'
 ], function(bindings) {
 
   return function off(element, condition) {

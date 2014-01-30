@@ -1,7 +1,7 @@
 define([
   'lodash',
-  'viewport/src/bindings',
-  'viewport/src/utils'
+  './bindings',
+  './utils'
 ], function(_, bindings, utils) {
 
   var _update = function(obj) {
