@@ -3,33 +3,46 @@ Viewport
 
 **Scroll tracker and viewport utilities.**
 
+### Install
+
+`bower install --save viewport`
+
 ```javascript
-  // Basic usage
-  
-  require.config({
-    packages: [{
-      name: 'viewport',
-      location: 'path/to/package'
-    }]
-  });
+// Add to require config
 
-  define(['viewport'], function(viewport) {
+require.config({
+  paths: {
+    viewport: '/path/to/bower_components/viewport/dist/viewport'
+  }
+});
+```
 
-    // The binding will be called when the element enters the viewport
-    viewport.on(element, 'enter', function(){});
+### Basic Usage
 
-    // The binding will be called when the element exits the viewport
-    viewport.on(element, 'exit', function(){});
+```javascript
+require(['viewport'], function(viewport) {
+
+  // The binding will be called when the element enters the viewport
+  viewport.on(element, 'enter', function(){});
+
+  // The binding will be called when the element exits the viewport
+  viewport.on(element, 'exit', function(){});
     
-    // The binding will be called when the element intersects the top of the viewport
-    viewport.on(element, 'intersectingTop', function(){});
+  // The binding will be called when the element intersects the top of the viewport
+  viewport.on(element, 'intersectingTop', function(){});
     
-    // The binding will be called when the element is entirely within the viewport
-    viewport.on(element, 'contained', function(){});
+  // The binding will be called when the element is entirely within the viewport
+  viewport.on(element, 'contained', function(){});
 
-  });
+});
+```
 
+### Documentation by example
 
+```javascript
+
+  // Bindings are specified by the position or condition that will trigger a callback
+  viewport.on(element, 'enter', someFunction);
 
   // Bindings can be bound to variety of positions and conditions, including:
   // - enter
@@ -42,13 +55,10 @@ Viewport
   // - intersectingMiddle
   // - intersectingBottom
 
-
-
   // Bindings can be bound to the negation of conditions by 
-  // prepending an exclamation mark.
-
-  // Binds the function to a condition where the element is 
-  // outside the viewport
+  // prepending an exclamation mark. For example, to bind a
+  // function to the condition where an element is outside
+  // the viewport
   viewport.on(element, '!inside', someFunction);
 
 
@@ -57,7 +67,7 @@ Viewport
   // see src/conditions.js for examples
 
   viewport.defineCondition('someCondition', function(element, data) {
-    // ...
+    return checkSomethingOn(element) ? true : false;
   });
 
 

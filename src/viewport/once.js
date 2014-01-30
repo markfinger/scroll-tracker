@@ -1,5 +1,5 @@
 define([
-  'viewport/src/on'
+  './on'
 ], function(on) {
 
   return function once (element, condition, binding, options) {
