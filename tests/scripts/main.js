@@ -3,7 +3,7 @@ require.config({
     jquery: '../components/jquery/jquery',
     lodash: '../components/lodash/dist/lodash',
     QUnit: '../components/qunit/qunit/qunit',
-    viewport: '../../src/viewport'
+    viewport: '../../dist/viewport-min'
   },
   shim: {
     QUnit: {
