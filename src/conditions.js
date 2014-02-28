@@ -96,28 +96,23 @@ define([
   defineCondition('enter', function(element, data) {
     var state = data.state;
     if (is(element, 'inside', data)) {
-      if (!state.inViewport) {
-        state.inViewport = true;
-        return true;
+      if (!state.hasEntered) {
+        return state.hasEntered = true;
       }
     } else {
-      state.inViewport = false;
+      state.hasEntered = false;
     }
     return false;
   });
 
   defineCondition('exit', function(element, data) {
     var state = data.state;
-    if (is(element, '!inside', data)) {
-      if (
-        state.inViewport === true ||
-        state.inViewport === undefined
-      ) {
-        state.inViewport = false;
-        return true;
+    if (!is(element, 'inside', data)) {
+      if (!state.hasExited) {
+        return state.hasExited = true;
       }
     } else {
-      state.inViewport = true;
+      state.hasExited = false;
     }
     return false;
   });
