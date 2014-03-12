@@ -2,7 +2,8 @@ require.config({
   paths: {
     jquery: '../components/jquery/jquery',
     lodash: '../components/lodash/dist/lodash',
-    QUnit: '../components/qunit/qunit/qunit'
+    QUnit: '../components/qunit/qunit/qunit',
+    viewport: '../../src/viewport'
   },
   shim: {
     QUnit: {
@@ -12,11 +13,7 @@ require.config({
         QUnit.config.autostart = false;
       }
     }
-  },
-  packages: [{
-    name: 'viewport',
-    location: '../..'
-  }]
+  }
 });
 
 require([

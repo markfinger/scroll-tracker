@@ -3,17 +3,17 @@
 
 define([
   'lodash',
-  'viewport/src/bindings',
-  'viewport/src/check',
-  'viewport/src/off',
-  'viewport/src/on',
-  'viewport/src/once',
-  'viewport/src/conditions',
-  'viewport/src/settings',
-  'viewport/src/start',
-  'viewport/src/stop',
-  'viewport/src/update',
-  'viewport/src/utils'
+  'viewport/bindings',
+  'viewport/check',
+  'viewport/off',
+  'viewport/on',
+  'viewport/once',
+  'viewport/conditions',
+  'viewport/settings',
+  'viewport/start',
+  'viewport/stop',
+  'viewport/update',
+  'viewport/utils'
 ], function(_, bindings, check, off, on, once, conditions, settings, start, stop, update, utils) {
 
   return _.assign(

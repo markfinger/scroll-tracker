@@ -1,8 +1,8 @@
 define([
-  'viewport/src/check',
-  'viewport/src/settings',
-  'viewport/src/start',
-  'viewport/src/update'
+  './check',
+  './settings',
+  './start',
+  './update'
 ], function(check, settings, start, update) {
 
   return function init() {

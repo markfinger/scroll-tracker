@@ -1,6 +1,6 @@
 define([
   'jquery',
-  'viewport/src/settings'
+  './settings'
 ], function($, settings) {
 
   return function stop() {

@@ -3,24 +3,23 @@ Viewport
 
 **Scroll tracker and viewport utilities.**
 
-### Installation and basic usage
+### Install
 
-Install via bower: `bower install --save viewport`
+`bower install --save viewport`
 
 ```javascript
 // Add to require config
 
 require.config({
-  packages: [{
-    name: 'viewport',
-    location: '/path/to/bower_components/viewport'
-  }]
+  paths: {
+    viewport: '/path/to/bower_components/viewport/dist/viewport'
+  }
 });
 ```
 
-```javascript
-// Access the package in AMD modules
+### Basic Usage
 
+```javascript
 require(['viewport'], function(viewport) {
 
   // The binding will be called when the element enters the viewport
@@ -42,6 +41,9 @@ require(['viewport'], function(viewport) {
 
 ```javascript
 
+  // Bindings are specified by the position or condition that will trigger a callback
+  viewport.on(element, 'enter', someFunction);
+
   // Bindings can be bound to variety of positions and conditions, including:
   // - enter
   // - exit
@@ -53,13 +55,10 @@ require(['viewport'], function(viewport) {
   // - intersectingMiddle
   // - intersectingBottom
 
-
-
   // Bindings can be bound to the negation of conditions by 
-  // prepending an exclamation mark.
-
-  // Binds the function to a condition where the element is 
-  // outside the viewport
+  // prepending an exclamation mark. For example, to bind a
+  // function to the condition where an element is outside
+  // the viewport
   viewport.on(element, '!inside', someFunction);
 
 
@@ -68,7 +67,7 @@ require(['viewport'], function(viewport) {
   // see src/conditions.js for examples
 
   viewport.defineCondition('someCondition', function(element, data) {
-    // ...
+    return checkSomethingOn(element) ? true : false;
   });
 
 

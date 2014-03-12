@@ -1,6 +1,6 @@
 define([
-  'viewport/src/utils',
-  'viewport/src/bindings'
+  './utils',
+  './bindings'
 ], function(utils, bindings) {
 
   var conditions = {};
