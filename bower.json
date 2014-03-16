@@ -1,30 +1,31 @@
 {
-  "name": "viewport",
-  "version": "0.1.0",
-  "description": "Scroll tracker and viewport utilities",
-  "homepage": "http://github.com/markfinger/viewport",
+  "name": "scroll-tracker",
+  "version": "0.3.0",
+  "description": "Tracks element positions relative to the viewport and fires conditional callbacks",
+  "homepage": "http://github.com/markfinger/scroll-tracker",
   "repository": {
     "type": "git",
-    "url": "git://github.com/markfinger/viewport.git"
+    "url": "git://github.com/markfinger/scroll-tracker.git"
   },
-  "main": "viewport.js",
+  "main": "scroll.js",
   "ignore": [
     "**/.*",
     "node_modules",
-    "components"
+    "bower_components"
   ],
-  "dependencies": {
-    "requirejs": ">=2.1.10",
-    "jquery": ">=1.10.2",
-    "lodash": ">=2.4.1"
-  },
   "keywords": [
-    "viewport",
     "scroll",
     "tracker",
+    "viewport",
     "tracking",
     "utilities",
     "visible",
     "elements"
-  ]
+  ],
+  "devDependencies": {
+    "jquery": "~2.1.0",
+    "lodash": "~2.4.1",
+    "qunit": "~1.14.0",
+    "underscore": "~1.6.0"
+  }
 }
