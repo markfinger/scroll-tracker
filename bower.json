@@ -1,6 +1,6 @@
 {
   "name": "scroll-tracker",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Tracks element positions relative to the viewport and fires conditional callbacks",
   "homepage": "http://github.com/markfinger/scroll-tracker",
   "repository": {
@@ -11,7 +11,8 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components"
+    "bower_components",
+    "tests"
   ],
   "keywords": [
     "scroll",
