@@ -1,38 +1,32 @@
-Viewport
+Scroll Tracker
 ============================================
 
-**Scroll tracker and viewport utilities.**
+**Tracks element positions relative to the viewport and fires conditional callbacks**
 
 ### Install
 
-`bower install --save viewport`
+`bower install --save scroll-tracker`
 
-```javascript
-// Add to require config
+### Dependencies
 
-require.config({
-  paths: {
-    viewport: '/path/to/bower_components/viewport/dist/viewport'
-  }
-});
-```
+- jQuery
+- Lodash/Underscore
 
 ### Basic Usage
 
 ```javascript
-require(['viewport'], function(viewport) {
 
   // The binding will be called when the element enters the viewport
-  viewport.on(element, 'enter', function(){});
+  scroll.on(element, 'enter', function(){});
 
   // The binding will be called when the element exits the viewport
-  viewport.on(element, 'exit', function(){});
-    
+  scroll.on(element, 'exit', function(){});
+
   // The binding will be called when the element intersects the top of the viewport
-  viewport.on(element, 'intersectingTop', function(){});
-    
+  scroll.on(element, 'intersectingTop', function(){});
+
   // The binding will be called when the element is entirely within the viewport
-  viewport.on(element, 'contained', function(){});
+  scroll.on(element, 'contained', function(){});
 
 });
 ```
@@ -42,76 +36,79 @@ require(['viewport'], function(viewport) {
 ```javascript
 
   // Bindings are specified by the position or condition that will trigger a callback
-  viewport.on(element, 'enter', someFunction);
+  scroll.on(element, 'enter', someFunction);
 
-  // Bindings can be bound to variety of positions and conditions, including:
-  // - enter
-  // - exit
-  // - inside
-  // - above
-  // - below
-  // - contained
-  // - intersectingTop
-  // - intersectingMiddle
-  // - intersectingBottom
+  // A number of predefined conditions are available:
+  //
+  //   'enter'
+  //   'exit'
+  //   'inside'
+  //   'above'
+  //   'below'
+  //   'contained'
+  //   'intersectingTop'
+  //   'intersectingMiddle'
+  //   'intersectingBottom'
+  //
 
-  // Bindings can be bound to the negation of conditions by 
+  // Bindings can be bound to the negation of conditions by
   // prepending an exclamation mark. For example, to bind a
-  // function to the condition where an element is outside
-  // the viewport
-  viewport.on(element, '!inside', someFunction);
+  // function to the condition where an element is not
+  // wholly within the viewport
+  scroll.on(element, '!contained', someFunction);
 
+  // All conditions can be checked programmatically...
 
+  // Returns true if an element is inside the viewport
+  scroll.is(element, 'inside');
 
-  // Additional conditions can be specified, 
-  // see src/conditions.js for examples
+  // Returns true if an element is both entirely within the viewport and
+  // intersecting the middle of the viewport
+  scroll.is(element, 'contained') && scroll.is(element, 'intersectingMiddle')
 
-  viewport.defineCondition('someCondition', function(element, data) {
-    return checkSomethingOn(element) ? true : false;
+  // Additional conditions can be specified, by providing an identifying string
+  // and a callback with which to test the condition.
+  // Callbacks should return `true` if the condition has been met, and false if
+  // not.
+  // Callbacks are provided with two arguments, the element that is being tested
+  // and an object containing precomputed information about the element's
+  // position, the viewport's position, and an object with which to persist
+  // state changes on an object.
+  scroll.defineCondition('someCondition', function(element, data) {
+    return scroll.is(element, 'inside', data) && someFunction(element, data);
   });
 
 
 
-  // All conditions can be checked programmatically
-
-  // Returns true if an element is inside the viewport
-  viewport.is(element, 'inside');
-
-  // Returns true if an element is not entirely within the viewport
-  viewport.is(element, '!contained');
-
-
-
-  // Calculations of positions can be offset, which is useful 
+  // Calculations of positions can be offset, which is useful
   // for working around fixed headers or footers
-
-  viewport.settings.topPadding = $('.fixed-nav').outerHeight();
-  viewport.settings.bottomPadding = $('.fixed-footer').outerHeight();
-
+  scroll.settings.topPadding = $('.fixed-header').outerHeight();
+  scroll.settings.bottomPadding = $('.fixed-footer').outerHeight();
 
 
-  // A variety of utility methods exist for working around the viewport
 
-  // Returns an element's top, bottom, left, and right offsets 
+  // A variety of utility methods exist for working with the viewport
+
+  // Returns an element's top, bottom, left, and right offsets
   // from the document's top and left.
-  viewport.offsetOf(element)
+  scroll.offsetOf(element)
 
   // Returns the viewport's position and dimensions.
-  viewport.position()
+  scroll.position()
 
   // Returns the dimensions of the document
-  viewport.document()
+  scroll.document()
 
   // Returns the vertical scroll position of the viewport
-  viewport.scrollY()
+  scroll.scrollY()
 
   // Returns the horizontal scroll position of the viewport
-  viewport.scrollX()
+  scroll.scrollX()
 
   // Returns the width of the viewport
-  viewport.width()
+  scroll.width()
 
-  // Returns the height of the viewport, with respect to 
+  // Returns the height of the viewport, with respect to
   // the `topPadding` and `bottomPadding` settings
-  viewport.height()
+  scroll.height()
 ```
