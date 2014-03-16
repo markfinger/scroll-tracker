@@ -11,7 +11,7 @@
     root.scroll = factory();
   }
 
-})(this, function (){
+})(this, function() {
 
   var settings = {
     // A positive number lowers the top of the viewport,
